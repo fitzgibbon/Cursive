@@ -9,6 +9,7 @@
 
     <title>printer.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -528,7 +529,7 @@
     {
         <span class='kw'>let</span> <span class='ident'>color</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>theme</span>.<span class='ident'>borders</span> {
             <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span>,
-            <span class='prelude-val'>Some</span>(<span class='ident'>BorderStyle</span>::<span class='ident'>Outset</span>) <span class='kw'>if</span> <span class='ident'>invert</span> <span class='op'>=&gt;</span> <span class='ident'>ColorStyle</span>::<span class='ident'>Secondary</span>,
+            <span class='prelude-val'>Some</span>(<span class='ident'>BorderStyle</span>::<span class='ident'>Outset</span>) <span class='kw'>if</span> <span class='ident'>invert</span> <span class='op'>=&gt;</span> <span class='ident'>ColorStyle</span>::<span class='ident'>Tertiary</span>,
             _ <span class='op'>=&gt;</span> <span class='ident'>ColorStyle</span>::<span class='ident'>Primary</span>,
         };
 

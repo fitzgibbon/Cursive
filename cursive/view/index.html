@@ -9,6 +9,7 @@
 
     <title>cursive::view - Rust</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -47,7 +48,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-58' class='srclink' href='../../src/cursive/src/view/mod.rs.html#1-173' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/cursive/view/mod.rs.html#1-173' title='goto source code'>[src]</a></span></h1>
 <div class='docblock'><p>Base elements required to build views.</p>
 
 <p>Views are the main building blocks of your UI.</p>
@@ -64,7 +65,7 @@ With this, the view is free to plan its content, including calling
 <code>View::layout()</code> on its own children.</p>
 
 <p>In order to determine how much space should be given each child, parents
-can use <code>View::get_min_size()</code> on them.</p>
+can use <code>View::required_size()</code> on them.</p>
 
 <h3 id='contracts' class='section-header'><a href='#contracts'>Contracts</a></h3>
 <p>When building new Views, you should respect these contracts:</p>
@@ -81,9 +82,9 @@ when both following conditions are met:</p>
 </ul>
 
 <p>In this case, it is safe to omit the call to <code>View::layout()</code>.</p></li>
-<li><p>The value returned by <code>get_min_size</code> should be an actually viable size,
+<li><p>The value returned by <code>required_size</code> should be an actually viable size,
 no matter what the request is. This means calling <code>View::layout()</code> with
-a size returned by <code>get_min_size</code> is <strong>never</strong> an error.</p></li>
+a size returned by <code>required_size</code> is <strong>never</strong> an error.</p></li>
 </ul>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
@@ -114,6 +115,13 @@ a size returned by <code>get_min_size</code> is <strong>never</strong> an error.
                                   title='cursive::view::Offset'>Offset</a></td>
                            <td class='docblock-short'>
                                 <p>Single-dimensional offset policy.</p>
+                           </td>
+                       </tr>
+                       <tr class=' module-item'>
+                           <td><a class='enum' href='enum.ScrollStrategy.html'
+                                  title='cursive::view::ScrollStrategy'>ScrollStrategy</a></td>
+                           <td class='docblock-short'>
+                                <p>Defines the scrolling behaviour on content or size change</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>

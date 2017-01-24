@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -125,9 +126,15 @@
 <span id="81">81</span>
 <span id="82">82</span>
 <span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Various views to use when creating the layout.</span>
 
+<span class='doccomment'>/// A macro to help with creating toggleable views.</span>
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_enabled</span> {
     (<span class='self'>self</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>x</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> {
 
@@ -164,12 +171,14 @@
 
 <span class='kw'>mod</span> <span class='ident'>box_view</span>;
 <span class='kw'>mod</span> <span class='ident'>button</span>;
+<span class='kw'>mod</span> <span class='ident'>canvas</span>;
 <span class='kw'>mod</span> <span class='ident'>checkbox</span>;
 <span class='kw'>mod</span> <span class='ident'>dialog</span>;
 <span class='kw'>mod</span> <span class='ident'>dummy</span>;
 <span class='kw'>mod</span> <span class='ident'>edit_view</span>;
 <span class='kw'>mod</span> <span class='ident'>id_view</span>;
 <span class='kw'>mod</span> <span class='ident'>key_event_view</span>;
+<span class='kw'>mod</span> <span class='ident'>layer</span>;
 <span class='kw'>mod</span> <span class='ident'>linear_layout</span>;
 <span class='kw'>mod</span> <span class='ident'>list_view</span>;
 <span class='kw'>mod</span> <span class='ident'>menubar</span>;
@@ -188,12 +197,14 @@
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>box_view</span>::<span class='ident'>BoxView</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>button</span>::<span class='ident'>Button</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>canvas</span>::<span class='ident'>Canvas</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>checkbox</span>::<span class='ident'>Checkbox</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>dialog</span>::<span class='ident'>Dialog</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>dummy</span>::<span class='ident'>DummyView</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>edit_view</span>::<span class='ident'>EditView</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>id_view</span>::<span class='ident'>IdView</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>key_event_view</span>::<span class='ident'>KeyEventView</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>layer</span>::<span class='ident'>Layer</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>linear_layout</span>::<span class='ident'>LinearLayout</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>list_view</span>::<span class='ident'>ListView</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>menu_popup</span>::<span class='ident'>MenuPopup</span>;

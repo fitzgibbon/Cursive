@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -233,7 +234,7 @@
 <span class='doccomment'>//! `View::layout()` on its own children.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! In order to determine how much space should be given each child, parents</span>
-<span class='doccomment'>//! can use `View::get_min_size()` on them.</span>
+<span class='doccomment'>//! can use `View::required_size()` on them.</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! ### Contracts</span>
@@ -249,9 +250,9 @@
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//!   In this case, it is safe to omit the call to `View::layout()`.</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! * The value returned by `get_min_size` should be an actually viable size,</span>
+<span class='doccomment'>//! * The value returned by `required_size` should be an actually viable size,</span>
 <span class='doccomment'>//!   no matter what the request is. This means calling `View::layout()` with</span>
-<span class='doccomment'>//!   a size returned by `get_min_size` is **never** an error.</span>
+<span class='doccomment'>//!   a size returned by `required_size` is **never** an error.</span>
 
 <span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
 <span class='kw'>mod</span> <span class='ident'>view_wrapper</span>;
@@ -277,7 +278,7 @@
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>position</span>::{<span class='ident'>Offset</span>, <span class='ident'>Position</span>};
 
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>scroll</span>::<span class='ident'>ScrollBase</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>scroll</span>::{<span class='ident'>ScrollBase</span>, <span class='ident'>ScrollStrategy</span>};
 
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>size_cache</span>::<span class='ident'>SizeCache</span>;
 <span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>size_constraint</span>::<span class='ident'>SizeConstraint</span>;
@@ -303,7 +304,7 @@
     <span class='doccomment'>/// It&#39;s also fine to ignore it and return a fixed value.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Default implementation always return `(1,1)`.</span>
-    <span class='kw'>fn</span> <span class='ident'>get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>constraint</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+    <span class='kw'>fn</span> <span class='ident'>required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>constraint</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
         <span class='kw'>let</span> _ <span class='op'>=</span> <span class='ident'>constraint</span>;
         <span class='ident'>Vec2</span>::<span class='ident'>new</span>(<span class='number'>1</span>, <span class='number'>1</span>)
     }
@@ -316,7 +317,7 @@
     <span class='doccomment'>/// * Views can ignore it and always return true (default implementation).</span>
     <span class='doccomment'>///   They will always be assumed to have changed.</span>
     <span class='doccomment'>/// * View Groups can ignore it and always re-layout their children.</span>
-    <span class='doccomment'>///     * If they call `get_min_size` or `layout` with stable parameters,</span>
+    <span class='doccomment'>///     * If they call `required_size` or `layout` with stable parameters,</span>
     <span class='doccomment'>///       the children may cache the result themselves and speed up the</span>
     <span class='doccomment'>///       process anyway.</span>
     <span class='kw'>fn</span> <span class='ident'>needs_relayout</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {

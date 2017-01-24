@@ -9,6 +9,7 @@
 
     <title>view_wrapper.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -203,9 +204,9 @@
         <span class='self'>self</span>.<span class='ident'>get_view</span>().<span class='ident'>draw</span>(<span class='ident'>printer</span>);
     }
 
-    <span class='doccomment'>/// Wraps the `get_min_size` method.</span>
-    <span class='kw'>fn</span> <span class='ident'>wrap_get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
-        <span class='self'>self</span>.<span class='ident'>get_view_mut</span>().<span class='ident'>get_min_size</span>(<span class='ident'>req</span>)
+    <span class='doccomment'>/// Wraps the `required_size` method.</span>
+    <span class='kw'>fn</span> <span class='ident'>wrap_required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+        <span class='self'>self</span>.<span class='ident'>get_view_mut</span>().<span class='ident'>required_size</span>(<span class='ident'>req</span>)
     }
 
     <span class='doccomment'>/// Wraps the `on_event` method.</span>
@@ -239,8 +240,8 @@
         <span class='self'>self</span>.<span class='ident'>wrap_draw</span>(<span class='ident'>printer</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
-        <span class='self'>self</span>.<span class='ident'>wrap_get_min_size</span>(<span class='ident'>req</span>)
+    <span class='kw'>fn</span> <span class='ident'>required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+        <span class='self'>self</span>.<span class='ident'>wrap_required_size</span>(<span class='ident'>req</span>)
     }
 
     <span class='kw'>fn</span> <span class='ident'>on_event</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>ch</span>: <span class='ident'>Event</span>) <span class='op'>-&gt;</span> <span class='ident'>EventResult</span> {

@@ -9,6 +9,7 @@
 
     <title>lib.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -624,6 +625,40 @@
 <span id="580">580</span>
 <span id="581">581</span>
 <span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Cursive</span>
 <span class='doccomment'>//!</span>
@@ -690,11 +725,15 @@
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>unicode_segmentation</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>unicode_width</span>;
 <span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>odds</span>;
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>num</span>;
+
+<span class='attribute'>#[<span class='ident'>macro_use</span>]</span>
+<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>chan</span>;
 
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>println_stderr</span>(
-    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='op'>*</span>) <span class='op'>=&gt;</span> { {
+    ($(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>:<span class='ident'>tt</span>)<span class='kw-2'>*</span>) <span class='op'>=&gt;</span> { {
         <span class='kw'>use</span> ::<span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>Write</span>;
-        <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='macro'>writeln</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>stderr</span>(), $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='op'>*</span>);
+        <span class='kw'>let</span> <span class='ident'>r</span> <span class='op'>=</span> <span class='macro'>writeln</span><span class='macro'>!</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> ::<span class='ident'>std</span>::<span class='ident'>io</span>::<span class='ident'>stderr</span>(), $(<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>arg</span>)<span class='kw-2'>*</span>);
         <span class='ident'>r</span>.<span class='ident'>expect</span>(<span class='string'>&quot;failed printing to stderr&quot;</span>);
     } }
 );
@@ -862,23 +901,23 @@
     <span class='doccomment'>/// let mut siv = Cursive::new();</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// siv.menubar()</span>
-    <span class='doccomment'>///    .add(&quot;File&quot;,</span>
+    <span class='doccomment'>///    .add_subtree(&quot;File&quot;,</span>
     <span class='doccomment'>///         MenuTree::new()</span>
     <span class='doccomment'>///             .leaf(&quot;New&quot;, |s| s.add_layer(Dialog::info(&quot;New file!&quot;)))</span>
     <span class='doccomment'>///             .subtree(&quot;Recent&quot;, MenuTree::new().with(|tree| {</span>
     <span class='doccomment'>///                 for i in 1..100 {</span>
-    <span class='doccomment'>///                     tree.add_leaf(&amp;format!(&quot;Item {}&quot;, i), |_| ())</span>
+    <span class='doccomment'>///                     tree.add_leaf(format!(&quot;Item {}&quot;, i), |_| ())</span>
     <span class='doccomment'>///                 }</span>
     <span class='doccomment'>///             }))</span>
     <span class='doccomment'>///             .delimiter()</span>
     <span class='doccomment'>///             .with(|tree| {</span>
     <span class='doccomment'>///                 for i in 1..10 {</span>
-    <span class='doccomment'>///                     tree.add_leaf(&amp;format!(&quot;Option {}&quot;, i), |_| ());</span>
+    <span class='doccomment'>///                     tree.add_leaf(format!(&quot;Option {}&quot;, i), |_| ());</span>
     <span class='doccomment'>///                 }</span>
     <span class='doccomment'>///             })</span>
     <span class='doccomment'>///             .delimiter()</span>
     <span class='doccomment'>///             .leaf(&quot;Quit&quot;, |s| s.quit()))</span>
-    <span class='doccomment'>///    .add(&quot;Help&quot;,</span>
+    <span class='doccomment'>///    .add_subtree(&quot;Help&quot;,</span>
     <span class='doccomment'>///         MenuTree::new()</span>
     <span class='doccomment'>///             .subtree(&quot;Help&quot;,</span>
     <span class='doccomment'>///                      MenuTree::new()</span>
@@ -957,7 +996,7 @@
     <span class='doccomment'>/// Returns a mutable reference to the currently active screen.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>screen_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>views</span>::<span class='ident'>StackView</span> {
         <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>active_screen</span>;
-        <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>get_mut</span>(<span class='ident'>id</span>).<span class='ident'>unwrap</span>()
+        <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>screens</span>[<span class='ident'>id</span>]
     }
 
     <span class='doccomment'>/// Adds a new screen, and returns its ID.</span>
@@ -1060,7 +1099,7 @@
         <span class='self'>self</span>.<span class='ident'>global_callbacks</span>.<span class='ident'>insert</span>(<span class='ident'>event</span>.<span class='ident'>into</span>(), <span class='ident'>Callback</span>::<span class='ident'>from_fn</span>(<span class='ident'>cb</span>));
     }
 
-    <span class='doccomment'>/// Convenient method to add a layer to the current screen.</span>
+    <span class='doccomment'>/// Add a layer to the current screen.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// # Examples</span>
     <span class='doccomment'>///</span>
@@ -1075,6 +1114,15 @@
     <span class='doccomment'>/// ```</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_layer</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='lifetime'>&#39;static</span> <span class='op'>+</span> <span class='ident'>View</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>view</span>: <span class='ident'>T</span>) {
         <span class='self'>self</span>.<span class='ident'>screen_mut</span>().<span class='ident'>add_layer</span>(<span class='ident'>view</span>);
+    }
+
+    <span class='doccomment'>/// Adds a new full-screen layer to the current screen.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Fullscreen layers have no shadow.</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>add_fullscreen_layer</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>view</span>: <span class='ident'>T</span>)
+        <span class='kw'>where</span> <span class='ident'>T</span>: <span class='lifetime'>&#39;static</span> <span class='op'>+</span> <span class='ident'>View</span>
+    {
+        <span class='self'>self</span>.<span class='ident'>screen_mut</span>().<span class='ident'>add_fullscreen_layer</span>(<span class='ident'>view</span>);
     }
 
     <span class='doccomment'>/// Convenient method to remove a layer from the current screen.</span>
@@ -1138,60 +1186,81 @@
         <span class='kw'>let</span> <span class='ident'>printer</span> <span class='op'>=</span>
             <span class='ident'>printer</span>.<span class='ident'>sub_printer</span>(<span class='ident'>Vec2</span>::<span class='ident'>new</span>(<span class='number'>0</span>, <span class='ident'>offset</span>), <span class='ident'>printer</span>.<span class='ident'>size</span>, <span class='op'>!</span><span class='ident'>selected</span>);
         <span class='kw'>let</span> <span class='ident'>id</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>active_screen</span>;
-        <span class='self'>self</span>.<span class='ident'>screens</span>.<span class='ident'>get_mut</span>(<span class='ident'>id</span>).<span class='ident'>unwrap</span>().<span class='ident'>draw</span>(<span class='kw-2'>&amp;</span><span class='ident'>printer</span>);
+        <span class='self'>self</span>.<span class='ident'>screens</span>[<span class='ident'>id</span>].<span class='ident'>draw</span>(<span class='kw-2'>&amp;</span><span class='ident'>printer</span>);
 
     }
+
+    <span class='doccomment'>/// Returns `true` until [`quit(&amp;mut self)`] is called.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`quit(&amp;mut self)`]: #method.quit</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_running</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
+        <span class='self'>self</span>.<span class='ident'>running</span>
+    }
+
 
     <span class='doccomment'>/// Runs the event loop.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// It will wait for user input (key presses)</span>
     <span class='doccomment'>/// and trigger callbacks accordingly.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Blocks until `quit()` is called.</span>
+    <span class='doccomment'>/// Calls [`step(&amp;mut self)`] until [`quit(&amp;mut self)`] is called.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`step(&amp;mut self)`]: #method.step</span>
+    <span class='doccomment'>/// [`quit(&amp;mut self)`]: #method.quit</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>run</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
 
         <span class='comment'>// And the big event loop begins!</span>
         <span class='kw'>while</span> <span class='self'>self</span>.<span class='ident'>running</span> {
-            <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cb</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cb_source</span>.<span class='ident'>try_recv</span>() {
-                <span class='ident'>cb</span>(<span class='self'>self</span>);
-            }
+            <span class='self'>self</span>.<span class='ident'>step</span>();
+        }
+    }
 
-            <span class='comment'>// Do we need to redraw everytime?</span>
-            <span class='comment'>// Probably, actually.</span>
-            <span class='comment'>// TODO: Do we need to re-layout everytime?</span>
-            <span class='self'>self</span>.<span class='ident'>layout</span>();
+    <span class='doccomment'>/// Performs a single step from the event loop.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// Useful if you need tighter control on the event loop.</span>
+    <span class='doccomment'>/// Otherwise, [`run(&amp;mut self)`] might be more convenient.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// [`run(&amp;mut self)`]: #method.run</span>
+    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>step</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
+        <span class='kw'>if</span> <span class='kw'>let</span> <span class='prelude-val'>Ok</span>(<span class='ident'>cb</span>) <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>cb_source</span>.<span class='ident'>try_recv</span>() {
+            <span class='ident'>cb</span>(<span class='self'>self</span>);
+        }
 
-            <span class='comment'>// TODO: Do we need to redraw every view every time?</span>
-            <span class='comment'>// (Is this getting repetitive? :p)</span>
-            <span class='self'>self</span>.<span class='ident'>draw</span>();
-            <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>refresh</span>();
+        <span class='comment'>// Do we need to redraw everytime?</span>
+        <span class='comment'>// Probably, actually.</span>
+        <span class='comment'>// TODO: Do we need to re-layout everytime?</span>
+        <span class='self'>self</span>.<span class='ident'>layout</span>();
 
-            <span class='comment'>// Wait for next event.</span>
-            <span class='comment'>// (If set_fps was called, this returns -1 now and then)</span>
-            <span class='kw'>let</span> <span class='ident'>event</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>poll_event</span>();
-            <span class='kw'>if</span> <span class='ident'>event</span> <span class='op'>==</span> <span class='ident'>Event</span>::<span class='ident'>Exit</span> {
-                <span class='self'>self</span>.<span class='ident'>quit</span>();
-            }
+        <span class='comment'>// TODO: Do we need to redraw every view every time?</span>
+        <span class='comment'>// (Is this getting repetitive? :p)</span>
+        <span class='self'>self</span>.<span class='ident'>draw</span>();
+        <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>refresh</span>();
 
-            <span class='kw'>if</span> <span class='ident'>event</span> <span class='op'>==</span> <span class='ident'>Event</span>::<span class='ident'>WindowResize</span> {
-                <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>clear</span>();
-            }
+        <span class='comment'>// Wait for next event.</span>
+        <span class='comment'>// (If set_fps was called, this returns -1 now and then)</span>
+        <span class='kw'>let</span> <span class='ident'>event</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>poll_event</span>();
+        <span class='kw'>if</span> <span class='ident'>event</span> <span class='op'>==</span> <span class='ident'>Event</span>::<span class='ident'>Exit</span> {
+            <span class='self'>self</span>.<span class='ident'>quit</span>();
+        }
 
-            <span class='comment'>// Event dispatch order:</span>
-            <span class='comment'>// * Focused element:</span>
-            <span class='comment'>//     * Menubar (if active)</span>
-            <span class='comment'>//     * Current screen (top layer)</span>
-            <span class='comment'>// * Global callbacks</span>
-            <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>menubar</span>.<span class='ident'>receive_events</span>() {
-                <span class='self'>self</span>.<span class='ident'>menubar</span>.<span class='ident'>on_event</span>(<span class='ident'>event</span>).<span class='ident'>process</span>(<span class='self'>self</span>);
-            } <span class='kw'>else</span> {
-                <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>screen_mut</span>().<span class='ident'>on_event</span>(<span class='ident'>event</span>) {
-                    <span class='comment'>// If the event was ignored,</span>
-                    <span class='comment'>// it is our turn to play with it.</span>
-                    <span class='ident'>EventResult</span>::<span class='ident'>Ignored</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>on_event</span>(<span class='ident'>event</span>),
-                    <span class='ident'>EventResult</span>::<span class='ident'>Consumed</span>(<span class='prelude-val'>None</span>) <span class='op'>=&gt;</span> (),
-                    <span class='ident'>EventResult</span>::<span class='ident'>Consumed</span>(<span class='prelude-val'>Some</span>(<span class='ident'>cb</span>)) <span class='op'>=&gt;</span> <span class='ident'>cb</span>(<span class='self'>self</span>),
-                }
+        <span class='kw'>if</span> <span class='ident'>event</span> <span class='op'>==</span> <span class='ident'>Event</span>::<span class='ident'>WindowResize</span> {
+            <span class='self'>self</span>.<span class='ident'>backend</span>.<span class='ident'>clear</span>();
+        }
+
+        <span class='comment'>// Event dispatch order:</span>
+        <span class='comment'>// * Focused element:</span>
+        <span class='comment'>//     * Menubar (if active)</span>
+        <span class='comment'>//     * Current screen (top layer)</span>
+        <span class='comment'>// * Global callbacks</span>
+        <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>menubar</span>.<span class='ident'>receive_events</span>() {
+            <span class='self'>self</span>.<span class='ident'>menubar</span>.<span class='ident'>on_event</span>(<span class='ident'>event</span>).<span class='ident'>process</span>(<span class='self'>self</span>);
+        } <span class='kw'>else</span> {
+            <span class='kw'>match</span> <span class='self'>self</span>.<span class='ident'>screen_mut</span>().<span class='ident'>on_event</span>(<span class='ident'>event</span>) {
+                <span class='comment'>// If the event was ignored,</span>
+                <span class='comment'>// it is our turn to play with it.</span>
+                <span class='ident'>EventResult</span>::<span class='ident'>Ignored</span> <span class='op'>=&gt;</span> <span class='self'>self</span>.<span class='ident'>on_event</span>(<span class='ident'>event</span>),
+                <span class='ident'>EventResult</span>::<span class='ident'>Consumed</span>(<span class='prelude-val'>None</span>) <span class='op'>=&gt;</span> (),
+                <span class='ident'>EventResult</span>::<span class='ident'>Consumed</span>(<span class='prelude-val'>Some</span>(<span class='ident'>cb</span>)) <span class='op'>=&gt;</span> <span class='ident'>cb</span>(<span class='self'>self</span>),
             }
         }
     }

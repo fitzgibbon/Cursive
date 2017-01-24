@@ -9,6 +9,7 @@
 
     <title>button.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -159,7 +160,7 @@
 <span class='kw'>use</span> {<span class='ident'>Cursive</span>, <span class='ident'>Printer</span>, <span class='ident'>With</span>};
 <span class='kw'>use</span> <span class='ident'>align</span>::<span class='ident'>HAlign</span>;
 <span class='kw'>use</span> <span class='ident'>direction</span>::<span class='ident'>Direction</span>;
-<span class='kw'>use</span> <span class='ident'>event</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>event</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>theme</span>::<span class='ident'>ColorStyle</span>;
 <span class='kw'>use</span> <span class='ident'>unicode_width</span>::<span class='ident'>UnicodeWidthStr</span>;
 <span class='kw'>use</span> <span class='ident'>vec</span>::<span class='ident'>Vec2</span>;
@@ -246,7 +247,7 @@
         });
     }
 
-    <span class='kw'>fn</span> <span class='ident'>get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+    <span class='kw'>fn</span> <span class='ident'>required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
         <span class='comment'>// Meh. Fixed size we are.</span>
         <span class='ident'>Vec2</span>::<span class='ident'>new</span>(<span class='number'>2</span> <span class='op'>+</span> <span class='self'>self</span>.<span class='ident'>label</span>.<span class='ident'>width</span>(), <span class='number'>1</span>)
     }

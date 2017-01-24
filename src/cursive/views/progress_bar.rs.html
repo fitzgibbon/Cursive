@@ -9,6 +9,7 @@
 
     <title>progress_bar.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -271,7 +272,7 @@
 </pre><pre class='rust '>
 
 
-<span class='kw'>use</span> {<span class='ident'>Cursive</span>, <span class='ident'>Printer</span>};
+<span class='kw'>use</span> <span class='ident'>Printer</span>;
 <span class='kw'>use</span> <span class='ident'>align</span>::<span class='ident'>HAlign</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>sync</span>::<span class='ident'>Arc</span>;
@@ -281,7 +282,7 @@
 <span class='kw'>use</span> <span class='ident'>theme</span>::{<span class='ident'>ColorStyle</span>, <span class='ident'>Effect</span>};
 <span class='kw'>use</span> <span class='ident'>view</span>::<span class='ident'>View</span>;
 
-<span class='kw'>pub</span> <span class='kw'>type</span> <span class='ident'>CbPromise</span> <span class='op'>=</span> <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Box</span><span class='op'>&lt;</span><span class='ident'>Fn</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>Cursive</span>) <span class='op'>+</span> <span class='ident'>Send</span><span class='op'>&gt;&gt;</span>;
+<span class='comment'>// pub type CbPromise = Option&lt;Box&lt;Fn(&amp;mut Cursive) + Send&gt;&gt;;</span>
 
 <span class='doccomment'>/// Atomic counter used by `ProgressBar`.</span>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Clone</span>)]</span>

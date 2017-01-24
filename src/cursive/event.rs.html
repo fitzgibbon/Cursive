@@ -9,6 +9,7 @@
 
     <title>event.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -355,7 +356,7 @@
 
     <span class='doccomment'>/// Returns `true` if `self` is `EventResult::Consumed`.</span>
     <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>is_consumed</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+        <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
             <span class='ident'>EventResult</span>::<span class='ident'>Consumed</span>(_) <span class='op'>=&gt;</span> <span class='bool-val'>true</span>,
             <span class='ident'>EventResult</span>::<span class='ident'>Ignored</span> <span class='op'>=&gt;</span> <span class='bool-val'>false</span>,
         }

@@ -9,6 +9,7 @@
 
     <title>radio.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -358,7 +359,7 @@
 }
 
 <span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> <span class='ident'>View</span> <span class='kw'>for</span> <span class='ident'>RadioButton</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+    <span class='kw'>fn</span> <span class='ident'>required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, _: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
         <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>label</span>.<span class='ident'>is_empty</span>() {
             <span class='ident'>Vec2</span>::<span class='ident'>new</span>(<span class='number'>3</span>, <span class='number'>1</span>)
         } <span class='kw'>else</span> {

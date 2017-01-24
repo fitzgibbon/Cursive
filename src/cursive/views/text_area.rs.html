@@ -9,6 +9,7 @@
 
     <title>text_area.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -821,7 +822,7 @@
             .<span class='ident'>find</span>(<span class='string'>&#39;\n&#39;</span>)
             .<span class='ident'>map</span>(<span class='op'>|</span><span class='ident'>i</span><span class='op'>|</span> <span class='number'>1</span> <span class='op'>+</span> <span class='ident'>i</span> <span class='op'>+</span> <span class='self'>self</span>.<span class='ident'>cursor</span>);
         <span class='kw'>let</span> <span class='ident'>last_row</span> <span class='op'>=</span> <span class='ident'>last_byte</span>.<span class='ident'>map_or</span>(<span class='self'>self</span>.<span class='ident'>rows</span>.<span class='ident'>len</span>(), <span class='op'>|</span><span class='ident'>last_byte</span><span class='op'>|</span> <span class='self'>self</span>.<span class='ident'>row_at</span>(<span class='ident'>last_byte</span>));
-        <span class='kw'>let</span> <span class='ident'>last_byte</span> <span class='op'>=</span> <span class='ident'>last_byte</span>.<span class='ident'>unwrap_or</span>(<span class='self'>self</span>.<span class='ident'>content</span>.<span class='ident'>len</span>());
+        <span class='kw'>let</span> <span class='ident'>last_byte</span> <span class='op'>=</span> <span class='ident'>last_byte</span>.<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='self'>self</span>.<span class='ident'>content</span>.<span class='ident'>len</span>());
 
         <span class='comment'>// println_stderr!(&quot;Content: `{}` (len={})&quot;,</span>
         <span class='comment'>//                 self.content,</span>

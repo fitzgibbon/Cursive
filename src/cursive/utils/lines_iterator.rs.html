@@ -9,6 +9,7 @@
 
     <title>lines_iterator.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -299,7 +300,7 @@
 
         <span class='comment'>// Find the ideal line, in an infinitely wide world.</span>
         <span class='comment'>// We&#39;ll make a line larger than that.</span>
-        <span class='kw'>let</span> <span class='ident'>next</span> <span class='op'>=</span> <span class='ident'>content</span>.<span class='ident'>find</span>(<span class='string'>&#39;\n&#39;</span>).<span class='ident'>unwrap_or</span>(<span class='ident'>content</span>.<span class='ident'>len</span>());
+        <span class='kw'>let</span> <span class='ident'>next</span> <span class='op'>=</span> <span class='ident'>content</span>.<span class='ident'>find</span>(<span class='string'>&#39;\n&#39;</span>).<span class='ident'>unwrap_or_else</span>(<span class='op'>||</span> <span class='ident'>content</span>.<span class='ident'>len</span>());
         <span class='kw'>let</span> <span class='ident'>content</span> <span class='op'>=</span> <span class='kw-2'>&amp;</span><span class='ident'>content</span>[..<span class='ident'>next</span>];
 
         <span class='kw'>let</span> <span class='ident'>allowed_width</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='self'>self</span>.<span class='ident'>show_spaces</span> {

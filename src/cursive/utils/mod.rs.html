@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -166,12 +167,12 @@
     <span class='kw'>let</span> <span class='ident'>delimiter_len</span> <span class='op'>=</span> <span class='ident'>delimiter</span>.<span class='ident'>len</span>();
 
     <span class='kw'>let</span> <span class='ident'>sum</span> <span class='op'>=</span> <span class='ident'>iter</span>.<span class='ident'>scan</span>(<span class='number'>0</span>, <span class='op'>|</span><span class='ident'>w</span>, <span class='ident'>token</span><span class='op'>|</span> {
-            <span class='op'>*</span><span class='ident'>w</span> <span class='op'>+=</span> <span class='ident'>token</span>.<span class='ident'>width</span>();
-            <span class='kw'>if</span> <span class='op'>*</span><span class='ident'>w</span> <span class='op'>&gt;</span> <span class='ident'>width</span> {
+            <span class='kw-2'>*</span><span class='ident'>w</span> <span class='op'>+=</span> <span class='ident'>token</span>.<span class='ident'>width</span>();
+            <span class='kw'>if</span> <span class='kw-2'>*</span><span class='ident'>w</span> <span class='op'>&gt;</span> <span class='ident'>width</span> {
                 <span class='prelude-val'>None</span>
             } <span class='kw'>else</span> {
                 <span class='comment'>// Add a space</span>
-                <span class='op'>*</span><span class='ident'>w</span> <span class='op'>+=</span> <span class='ident'>delimiter_width</span>;
+                <span class='kw-2'>*</span><span class='ident'>w</span> <span class='op'>+=</span> <span class='ident'>delimiter_width</span>;
                 <span class='prelude-val'>Some</span>(<span class='ident'>token</span>)
             }
         })

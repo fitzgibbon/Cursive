@@ -9,6 +9,7 @@
 
     <title>mod.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -94,11 +95,11 @@
 <span class='kw'>mod</span> <span class='ident'>curses</span>;
 
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>any</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;ncurses&quot;</span>, <span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;pancurses&quot;</span>))]</span>
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>curses</span>::<span class='op'>*</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>curses</span>::<span class='kw-2'>*</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;termion&quot;</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>termion</span>::<span class='op'>*</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>termion</span>::<span class='kw-2'>*</span>;
 <span class='attribute'>#[<span class='ident'>cfg</span>(<span class='ident'>feature</span> <span class='op'>=</span> <span class='string'>&quot;bear-lib-terminal&quot;</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>blt</span>::<span class='op'>*</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>blt</span>::<span class='kw-2'>*</span>;
 
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Backend</span> {
     <span class='kw'>fn</span> <span class='ident'>init</span>() <span class='op'>-&gt;</span> <span class='self'>Self</span>;

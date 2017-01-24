@@ -9,6 +9,7 @@
 
     <title>dialog.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../../main.css">
     
@@ -453,9 +454,9 @@
 <span class='kw'>use</span> <span class='ident'>Cursive</span>;
 <span class='kw'>use</span> <span class='ident'>Printer</span>;
 <span class='kw'>use</span> <span class='ident'>With</span>;
-<span class='kw'>use</span> <span class='ident'>align</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>align</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>direction</span>::<span class='ident'>Direction</span>;
-<span class='kw'>use</span> <span class='ident'>event</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>event</span>::<span class='kw-2'>*</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>any</span>::<span class='ident'>Any</span>;
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>max</span>;
 <span class='kw'>use</span> <span class='ident'>theme</span>::<span class='ident'>ColorStyle</span>;
@@ -697,7 +698,7 @@
 
     }
 
-    <span class='kw'>fn</span> <span class='ident'>get_min_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
+    <span class='kw'>fn</span> <span class='ident'>required_size</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>req</span>: <span class='ident'>Vec2</span>) <span class='op'>-&gt;</span> <span class='ident'>Vec2</span> {
         <span class='comment'>// Padding and borders are not available for kids.</span>
         <span class='kw'>let</span> <span class='ident'>nomans_land</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>padding</span>.<span class='ident'>combined</span>() <span class='op'>+</span> <span class='self'>self</span>.<span class='ident'>borders</span>.<span class='ident'>combined</span>();
 
@@ -707,7 +708,7 @@
             <span class='ident'>buttons_size</span>.<span class='ident'>x</span> <span class='op'>+=</span> <span class='self'>self</span>.<span class='ident'>buttons</span>.<span class='ident'>len</span>() <span class='op'>-</span> <span class='number'>1</span>;
         }
         <span class='kw'>for</span> <span class='ident'>button</span> <span class='kw'>in</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>.<span class='ident'>buttons</span> {
-            <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>button</span>.<span class='ident'>view</span>.<span class='ident'>get_min_size</span>(<span class='ident'>req</span>);
+            <span class='kw'>let</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>button</span>.<span class='ident'>view</span>.<span class='ident'>required_size</span>(<span class='ident'>req</span>);
             <span class='ident'>buttons_size</span>.<span class='ident'>x</span> <span class='op'>+=</span> <span class='ident'>s</span>.<span class='ident'>x</span>;
             <span class='ident'>buttons_size</span>.<span class='ident'>y</span> <span class='op'>=</span> <span class='ident'>max</span>(<span class='ident'>buttons_size</span>.<span class='ident'>y</span>, <span class='ident'>s</span>.<span class='ident'>y</span> <span class='op'>+</span> <span class='number'>1</span>);
         }
@@ -720,7 +721,7 @@
         }
         <span class='kw'>let</span> <span class='ident'>content_req</span> <span class='op'>=</span> <span class='ident'>req</span> <span class='op'>-</span> <span class='ident'>taken</span>;
 
-        <span class='kw'>let</span> <span class='ident'>content_size</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>content</span>.<span class='ident'>get_min_size</span>(<span class='ident'>content_req</span>);
+        <span class='kw'>let</span> <span class='ident'>content_size</span> <span class='op'>=</span> <span class='self'>self</span>.<span class='ident'>content</span>.<span class='ident'>required_size</span>(<span class='ident'>content_req</span>);
 
         <span class='comment'>// On the Y axis, we add buttons and content.</span>
         <span class='comment'>// On the X axis, we take the max.</span>
@@ -750,7 +751,7 @@
         <span class='comment'>// Buttons are kings, we give them everything they want.</span>
         <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>buttons_height</span> <span class='op'>=</span> <span class='number'>0</span>;
         <span class='kw'>for</span> <span class='ident'>button</span> <span class='kw'>in</span> <span class='self'>self</span>.<span class='ident'>buttons</span>.<span class='ident'>iter_mut</span>().<span class='ident'>rev</span>() {
-            <span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>button</span>.<span class='ident'>get_min_size</span>(<span class='ident'>size</span>);
+            <span class='kw'>let</span> <span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>button</span>.<span class='ident'>required_size</span>(<span class='ident'>size</span>);
             <span class='ident'>buttons_height</span> <span class='op'>=</span> <span class='ident'>max</span>(<span class='ident'>buttons_height</span>, <span class='ident'>size</span>.<span class='ident'>y</span> <span class='op'>+</span> <span class='number'>1</span>);
             <span class='ident'>button</span>.<span class='ident'>layout</span>(<span class='ident'>size</span>);
         }

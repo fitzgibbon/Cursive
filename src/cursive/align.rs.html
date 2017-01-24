@@ -9,6 +9,7 @@
 
     <title>align.rs.html -- source</title>
 
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
     
@@ -214,7 +215,7 @@
         <span class='kw'>if</span> <span class='ident'>container</span> <span class='op'>&lt;</span> <span class='ident'>content</span> {
             <span class='number'>0</span>
         } <span class='kw'>else</span> {
-            <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
                 <span class='ident'>HAlign</span>::<span class='ident'>Left</span> <span class='op'>=&gt;</span> <span class='number'>0</span>,
                 <span class='ident'>HAlign</span>::<span class='ident'>Center</span> <span class='op'>=&gt;</span> (<span class='ident'>container</span> <span class='op'>-</span> <span class='ident'>content</span>) <span class='op'>/</span> <span class='number'>2</span>,
                 <span class='ident'>HAlign</span>::<span class='ident'>Right</span> <span class='op'>=&gt;</span> (<span class='ident'>container</span> <span class='op'>-</span> <span class='ident'>content</span>),
@@ -233,7 +234,7 @@
         <span class='kw'>if</span> <span class='ident'>container</span> <span class='op'>&lt;</span> <span class='ident'>content</span> {
             <span class='number'>0</span>
         } <span class='kw'>else</span> {
-            <span class='kw'>match</span> <span class='op'>*</span><span class='self'>self</span> {
+            <span class='kw'>match</span> <span class='kw-2'>*</span><span class='self'>self</span> {
                 <span class='ident'>VAlign</span>::<span class='ident'>Top</span> <span class='op'>=&gt;</span> <span class='number'>0</span>,
                 <span class='ident'>VAlign</span>::<span class='ident'>Center</span> <span class='op'>=&gt;</span> (<span class='ident'>container</span> <span class='op'>-</span> <span class='ident'>content</span>) <span class='op'>/</span> <span class='number'>2</span>,
                 <span class='ident'>VAlign</span>::<span class='ident'>Bottom</span> <span class='op'>=&gt;</span> (<span class='ident'>container</span> <span class='op'>-</span> <span class='ident'>content</span>),
