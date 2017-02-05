@@ -3,6 +3,7 @@
 use {Cursive, Printer, With};
 use direction::Direction;
 use event::{Callback, Event, EventResult, Key};
+use std::cell::RefCell;
 
 use std::rc::Rc;
 use theme::{ColorStyle, Effect};
@@ -74,11 +75,11 @@ pub struct EditView {
 
     /// Callback when the content is modified.
     ///
-    /// Will be called with the current content and the cursor position
-    on_edit: Option<Rc<Fn(&mut Cursive, &str, usize)>>,
+    /// Will be called with the current content and the cursor position.
+    on_edit: Option<Rc<RefCell<FnMut(&mut Cursive, &str, usize)>>>,
 
     /// Callback when <Enter> is pressed.
-    on_submit: Option<Rc<Fn(&mut Cursive, &str)>>,
+    on_submit: Option<Rc<RefCell<FnMut(&mut Cursive, &str)>>>,
 
     /// When `true`, only print `*` instead of the true content.
     secret: bool,
@@ -140,20 +141,26 @@ impl EditView {
     ///
     /// `callback` will be called with the view
     /// content and the current cursor position.
+    ///
+    /// *Warning*: this callback cannot be called recursivelly. If you somehow
+    /// trigger this callback again in the given closure, it will be ignored.
     pub fn on_edit<F>(mut self, callback: F) -> Self
-        where F: Fn(&mut Cursive, &str, usize) + 'static
+        where F: FnMut(&mut Cursive, &str, usize) + 'static
     {
-        self.on_edit = Some(Rc::new(callback));
+        self.on_edit = Some(Rc::new(RefCell::new(callback)));
         self
     }
 
     /// Sets a callback to be called when `<Enter>` is pressed.
     ///
     /// `callback` will be given the content of the view.
+    ///
+    /// *Warning*: this callback cannot be called recursivelly. If you somehow
+    /// trigger this callback again in the given closure, it will be ignored.
     pub fn on_submit<F>(mut self, callback: F) -> Self
-        where F: Fn(&mut Cursive, &str) + 'static
+        where F: FnMut(&mut Cursive, &str) + 'static
     {
-        self.on_submit = Some(Rc::new(callback));
+        self.on_submit = Some(Rc::new(RefCell::new(callback)));
         self
     }
 
@@ -393,7 +400,13 @@ impl View for EditView {
                 let cb = self.on_submit.clone().unwrap();
                 let content = self.content.clone();
                 return EventResult::with_cb(move |s| {
-                    cb(s, &content);
+                    // Here's the weird trick: if we're already borrowed,
+                    // just ignored the callback.
+                    if let Ok(mut cb) = cb.try_borrow_mut() {
+                        // Beeeaaah that's ugly.
+                        // Why do we need to manually dereference here?
+                        (&mut *cb)(s, &content);
+                    }
                 });
             }
             _ => return EventResult::Ignored,
@@ -403,12 +416,18 @@ impl View for EditView {
 
         let cb = self.on_edit.clone().map(|cb| {
 
-            // Get a new Rc on it
+            // Get a new Rc on the content
             let content = self.content.clone();
             let cursor = self.cursor;
 
             Callback::from_fn(move |s| {
-                cb(s, &content, cursor);
+                // Here's the weird trick: if we're already borrowed,
+                // just ignored the callback.
+                if let Ok(mut cb) = cb.try_borrow_mut() {
+                    // Beeeaaah that's ugly.
+                    // Why do we need to manually dereference here?
+                    (&mut *cb)(s, &content, cursor);
+                }
             })
         });
         EventResult::Consumed(cb)
