@@ -73,35 +73,35 @@
 <span id="28">28</span>
 <span id="29">29</span>
 <span id="30">30</span>
-</pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>vec</span>::<span class='ident'>Vec2</span>;
-<span class='kw'>use</span> <span class='ident'>view</span>::<span class='ident'>View</span>;
-<span class='kw'>use</span> <span class='ident'>view</span>::<span class='ident'>ViewWrapper</span>;
+</pre><pre class="rust ">
+<span class="kw">use</span> <span class="ident">vec</span>::<span class="ident">Vec2</span>;
+<span class="kw">use</span> <span class="ident">view</span>::<span class="ident">View</span>;
+<span class="kw">use</span> <span class="ident">view</span>::<span class="ident">ViewWrapper</span>;
 
-<span class='doccomment'>/// Wrapper around a view that remembers its size.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>SizedView</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>View</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Wrapped view.</span>
-    <span class='kw'>pub</span> <span class='ident'>view</span>: <span class='ident'>T</span>,
-    <span class='doccomment'>/// Cached size from the last layout() call.</span>
-    <span class='kw'>pub</span> <span class='ident'>size</span>: <span class='ident'>Vec2</span>,
+<span class="doccomment">/// Wrapper around a view that remembers its size.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SizedView</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">View</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Wrapped view.</span>
+    <span class="kw">pub</span> <span class="ident">view</span>: <span class="ident">T</span>,
+    <span class="doccomment">/// Cached size from the last layout() call.</span>
+    <span class="kw">pub</span> <span class="ident">size</span>: <span class="ident">Vec2</span>,
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>View</span><span class='op'>&gt;</span> <span class='ident'>SizedView</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Wraps the given view.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>view</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>SizedView</span> {
-            <span class='ident'>view</span>: <span class='ident'>view</span>,
-            <span class='ident'>size</span>: <span class='ident'>Vec2</span>::<span class='ident'>zero</span>(),
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">View</span><span class="op">&gt;</span> <span class="ident">SizedView</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Wraps the given view.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">view</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">SizedView</span> {
+            <span class="ident">view</span>: <span class="ident">view</span>,
+            <span class="ident">size</span>: <span class="ident">Vec2</span>::<span class="ident">zero</span>(),
         }
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>View</span><span class='op'>&gt;</span> <span class='ident'>ViewWrapper</span> <span class='kw'>for</span> <span class='ident'>SizedView</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='macro'>wrap_impl</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>view</span>: <span class='ident'>T</span>);
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">View</span><span class="op">&gt;</span> <span class="ident">ViewWrapper</span> <span class="kw">for</span> <span class="ident">SizedView</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="macro">wrap_impl</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">view</span>: <span class="ident">T</span>);
 
-    <span class='kw'>fn</span> <span class='ident'>wrap_layout</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>size</span>: <span class='ident'>Vec2</span>) {
-        <span class='self'>self</span>.<span class='ident'>size</span> <span class='op'>=</span> <span class='ident'>size</span>;
-        <span class='self'>self</span>.<span class='ident'>view</span>.<span class='ident'>layout</span>(<span class='ident'>size</span>);
+    <span class="kw">fn</span> <span class="ident">wrap_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">Vec2</span>) {
+        <span class="self">self</span>.<span class="ident">size</span> <span class="op">=</span> <span class="ident">size</span>;
+        <span class="self">self</span>.<span class="ident">view</span>.<span class="ident">layout</span>(<span class="ident">size</span>);
     }
 }
 </pre>

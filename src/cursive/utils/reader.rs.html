@@ -84,46 +84,46 @@
 <span id="39">39</span>
 <span id="40">40</span>
 <span id="41">41</span>
-</pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>io</span>::{<span class='self'>self</span>, <span class='ident'>Read</span>};
+</pre><pre class="rust ">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">io</span>::{<span class="self">self</span>, <span class="ident">Read</span>};
 
-<span class='kw'>use</span> <span class='ident'>views</span>::<span class='ident'>Counter</span>;
+<span class="kw">use</span> <span class="ident">views</span>::<span class="ident">Counter</span>;
 
-<span class='doccomment'>/// Wrapper around a `Read` that reports the progress made.</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// Used to monitor a file downloading or other slow IO task</span>
-<span class='doccomment'>/// in a progress bar.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ProgressReader</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span> {
-    <span class='ident'>reader</span>: <span class='ident'>R</span>,
-    <span class='ident'>counter</span>: <span class='ident'>Counter</span>,
+<span class="doccomment">/// Wrapper around a `Read` that reports the progress made.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Used to monitor a file downloading or other slow IO task</span>
+<span class="doccomment">/// in a progress bar.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ProgressReader</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> {
+    <span class="ident">reader</span>: <span class="ident">R</span>,
+    <span class="ident">counter</span>: <span class="ident">Counter</span>,
 }
 
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span> <span class='ident'>ProgressReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
-    <span class='doccomment'>/// Creates a new `ProgressReader` around `reader`.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// `counter` will be updated with the number of bytes read.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// You should make sure the progress bar knows how</span>
-    <span class='doccomment'>/// many bytes should be received.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>(<span class='ident'>counter</span>: <span class='ident'>Counter</span>, <span class='ident'>reader</span>: <span class='ident'>R</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>ProgressReader</span> {
-            <span class='ident'>reader</span>: <span class='ident'>reader</span>,
-            <span class='ident'>counter</span>: <span class='ident'>counter</span>,
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">ProgressReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Creates a new `ProgressReader` around `reader`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// `counter` will be updated with the number of bytes read.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// You should make sure the progress bar knows how</span>
+    <span class="doccomment">/// many bytes should be received.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">counter</span>: <span class="ident">Counter</span>, <span class="ident">reader</span>: <span class="ident">R</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">ProgressReader</span> {
+            <span class="ident">reader</span>: <span class="ident">reader</span>,
+            <span class="ident">counter</span>: <span class="ident">counter</span>,
         }
     }
 
-    <span class='doccomment'>/// Unwraps this `ProgressReader`, returning the reader and counter.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>deconstruct</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>R</span>, <span class='ident'>Counter</span>) {
-        (<span class='self'>self</span>.<span class='ident'>reader</span>, <span class='self'>self</span>.<span class='ident'>counter</span>)
+    <span class="doccomment">/// Unwraps this `ProgressReader`, returning the reader and counter.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">deconstruct</span>(<span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">R</span>, <span class="ident">Counter</span>) {
+        (<span class="self">self</span>.<span class="ident">reader</span>, <span class="self">self</span>.<span class="ident">counter</span>)
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>R</span>: <span class='ident'>Read</span><span class='op'>&gt;</span> <span class='ident'>Read</span> <span class='kw'>for</span> <span class='ident'>ProgressReader</span><span class='op'>&lt;</span><span class='ident'>R</span><span class='op'>&gt;</span> {
-    <span class='kw'>fn</span> <span class='ident'>read</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>buf</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>u8</span>]) <span class='op'>-&gt;</span> <span class='ident'>io</span>::<span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span> {
-        <span class='kw'>let</span> <span class='ident'>result</span> <span class='op'>=</span> <span class='macro'>try</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>reader</span>.<span class='ident'>read</span>(<span class='ident'>buf</span>));
-        <span class='self'>self</span>.<span class='ident'>counter</span>.<span class='ident'>tick</span>(<span class='ident'>result</span>);
-        <span class='prelude-val'>Ok</span>(<span class='ident'>result</span>)
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">Read</span> <span class="kw">for</span> <span class="ident">ProgressReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-&gt;</span> <span class="ident">io</span>::<span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">try</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">read</span>(<span class="ident">buf</span>));
+        <span class="self">self</span>.<span class="ident">counter</span>.<span class="ident">tick</span>(<span class="ident">result</span>);
+        <span class="prelude-val">Ok</span>(<span class="ident">result</span>)
     }
 }
 </pre>

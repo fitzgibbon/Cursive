@@ -44,28 +44,28 @@
     </nav>
 
     <section id='main' class="content macro">
-<h1 class='fqn'><span class='in-band'>Macro <a href='index.html'>cursive</a>::<wbr><a class='macro' href=''>wrap_impl</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Macro <a href='index.html'>cursive</a>::<wbr><a class="macro" href=''>wrap_impl</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/cursive/view/view_wrapper.rs.html#116-128' title='goto source code'>[src]</a></span></h1>
-<pre class='rust macro'>
-<span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>wrap_impl</span> {
-    (<span class='self'>self</span>.<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>v</span>:<span class='ident'>ident</span>: <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>t</span>:<span class='ident'>ty</span>) <span class='op'>=&gt;</span> { ... };
+               </span><a class='srclink' href='../src/cursive/view/view_wrapper.rs.html#128-144' title='goto source code'>[src]</a></span></h1>
+<pre class="rust macro">
+<span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">wrap_impl</span> {
+    (<span class="self">self</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">v</span>:<span class="ident">ident</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">t</span>:<span class="ident">ty</span>) <span class="op">=&gt;</span> { ... };
 }</pre>
 <div class='docblock'><p>Convenient macro to implement the <a href="view/trait.ViewWrapper.html"><code>ViewWrapper</code></a> trait.</p>
 
-<p>It defines the <code>get_view</code> and <code>get_view_mut</code> implementations,
+<p>It defines the <code>with_view</code> and <code>with_view_mut</code> implementations,
 as well as the <code>type V</code> declaration.</p>
 
 <h1 id='examples' class='section-header'><a href='#examples'>Examples</a></h1>
-<pre class='rust rust-example-rendered'>
-<span class='kw'>struct</span> <span class='ident'>FooView</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>View</span><span class='op'>&gt;</span> {
-    <span class='ident'>view</span>: <span class='ident'>T</span>,
+<pre class="rust rust-example-rendered">
+<span class="kw">struct</span> <span class="ident">FooView</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">View</span><span class="op">&gt;</span> {
+    <span class="ident">view</span>: <span class="ident">T</span>,
 }
 
-<span class='kw'>impl</span> <span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>View</span><span class='op'>&gt;</span> <span class='ident'>ViewWrapper</span> <span class='kw'>for</span> <span class='ident'>FooView</span><span class='op'>&lt;</span><span class='ident'>T</span><span class='op'>&gt;</span> {
-    <span class='macro'>wrap_impl</span><span class='macro'>!</span>(<span class='self'>self</span>.<span class='ident'>view</span>: <span class='ident'>T</span>);
+<span class="kw">impl</span> <span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">View</span><span class="op">&gt;</span> <span class="ident">ViewWrapper</span> <span class="kw">for</span> <span class="ident">FooView</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="macro">wrap_impl</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">view</span>: <span class="ident">T</span>);
 }</pre>
 </div></section>
     <section id='search' class="content hidden"></section>

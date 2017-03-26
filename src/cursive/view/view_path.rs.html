@@ -75,37 +75,37 @@
 <span id="30">30</span>
 <span id="31">31</span>
 <span id="32">32</span>
-</pre><pre class='rust '>
-<span class='doccomment'>/// Represents a path to a single view in the layout.</span>
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>ViewPath</span> {
-    <span class='doccomment'>/// List of turns to make on decision nodes when descending the view tree.</span>
-    <span class='doccomment'>/// Simple nodes (with one fixed child) are skipped.</span>
-    <span class='kw'>pub</span> <span class='ident'>path</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='ident'>usize</span><span class='op'>&gt;</span>,
+</pre><pre class="rust ">
+<span class="doccomment">/// Represents a path to a single view in the layout.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ViewPath</span> {
+    <span class="doccomment">/// List of turns to make on decision nodes when descending the view tree.</span>
+    <span class="doccomment">/// Simple nodes (with one fixed child) are skipped.</span>
+    <span class="kw">pub</span> <span class="ident">path</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
 }
 
-<span class='macro'>new_default</span><span class='macro'>!</span>(<span class='ident'>ViewPath</span>);
+<span class="macro">new_default</span><span class="macro">!</span>(<span class="ident">ViewPath</span>);
 
-<span class='kw'>impl</span> <span class='ident'>ViewPath</span> {
-    <span class='doccomment'>/// Creates a new empty path.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>new</span>() <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>ViewPath</span> { <span class='ident'>path</span>: <span class='ident'>Vec</span>::<span class='ident'>new</span>() }
+<span class="kw">impl</span> <span class="ident">ViewPath</span> {
+    <span class="doccomment">/// Creates a new empty path.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">ViewPath</span> { <span class="ident">path</span>: <span class="ident">Vec</span>::<span class="ident">new</span>() }
     }
 
-    <span class='doccomment'>/// Creates a path from the given item.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>from</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>ToPath</span><span class='op'>&gt;</span>(<span class='ident'>path</span>: <span class='ident'>T</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>path</span>.<span class='ident'>to_path</span>()
+    <span class="doccomment">/// Creates a path from the given item.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">ToPath</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">path</span>.<span class="ident">to_path</span>()
     }
 }
 
-<span class='doccomment'>/// Generic trait for elements that can be converted into a `ViewPath`.</span>
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>ToPath</span> {
-    <span class='doccomment'>/// Creates a path from the element.</span>
-    <span class='kw'>fn</span> <span class='ident'>to_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>ViewPath</span>;
+<span class="doccomment">/// Generic trait for elements that can be converted into a `ViewPath`.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ToPath</span> {
+    <span class="doccomment">/// Creates a path from the element.</span>
+    <span class="kw">fn</span> <span class="ident">to_path</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ViewPath</span>;
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='lifetime'>&#39;a</span><span class='op'>&gt;</span> <span class='ident'>ToPath</span> <span class='kw'>for</span> <span class='kw-2'>&amp;</span><span class='lifetime'>&#39;a</span> [<span class='ident'>usize</span>] {
-    <span class='kw'>fn</span> <span class='ident'>to_path</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>ViewPath</span> {
-        <span class='ident'>ViewPath</span> { <span class='ident'>path</span>: <span class='self'>self</span>.<span class='ident'>to_owned</span>() }
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToPath</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">usize</span>] {
+    <span class="kw">fn</span> <span class="ident">to_path</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">ViewPath</span> {
+        <span class="ident">ViewPath</span> { <span class="ident">path</span>: <span class="self">self</span>.<span class="ident">to_owned</span>() }
     }
 }
 </pre>

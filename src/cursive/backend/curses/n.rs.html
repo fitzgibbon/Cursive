@@ -274,236 +274,246 @@
 <span id="229">229</span>
 <span id="230">230</span>
 <span id="231">231</span>
-</pre><pre class='rust '>
-<span class='kw'>extern</span> <span class='kw'>crate</span> <span class='ident'>ncurses</span>;
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+</pre><pre class="rust ">
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">ncurses</span>;
 
-<span class='kw'>use</span> <span class='ident'>backend</span>;
-<span class='kw'>use</span> <span class='ident'>event</span>::{<span class='ident'>Event</span>, <span class='ident'>Key</span>};
 
-<span class='kw'>use</span> <span class='self'>self</span>::<span class='kw'>super</span>::<span class='ident'>find_closest</span>;
-<span class='kw'>use</span> <span class='ident'>theme</span>::{<span class='ident'>Color</span>, <span class='ident'>ColorStyle</span>, <span class='ident'>Effect</span>};
-<span class='kw'>use</span> <span class='ident'>utf8</span>;
+<span class="kw">use</span> <span class="self">self</span>::<span class="kw">super</span>::<span class="ident">find_closest</span>;
+<span class="kw">use</span> <span class="ident">backend</span>;
+<span class="kw">use</span> <span class="ident">event</span>::{<span class="ident">Event</span>, <span class="ident">Key</span>};
+<span class="kw">use</span> <span class="ident">theme</span>::{<span class="ident">Color</span>, <span class="ident">ColorStyle</span>, <span class="ident">Effect</span>};
+<span class="kw">use</span> <span class="ident">utf8</span>;
 
-<span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Concrete</span>;
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Concrete</span>;
 
-<span class='kw'>impl</span> <span class='ident'>backend</span>::<span class='ident'>Backend</span> <span class='kw'>for</span> <span class='ident'>Concrete</span> {
-    <span class='kw'>fn</span> <span class='ident'>init</span>() <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='comment'>// The delay is the time ncurses wait after pressing ESC</span>
-        <span class='comment'>// to see if it&#39;s an escape sequence.</span>
-        <span class='comment'>// Default delay is way too long. 25 is imperceptible yet works fine.</span>
-        ::<span class='ident'>std</span>::<span class='ident'>env</span>::<span class='ident'>set_var</span>(<span class='string'>&quot;ESCDELAY&quot;</span>, <span class='string'>&quot;25&quot;</span>);
-        <span class='ident'>ncurses</span>::<span class='ident'>setlocale</span>(<span class='ident'>ncurses</span>::<span class='ident'>LcCategory</span>::<span class='ident'>all</span>, <span class='string'>&quot;&quot;</span>);
-        <span class='ident'>ncurses</span>::<span class='ident'>initscr</span>();
-        <span class='ident'>ncurses</span>::<span class='ident'>keypad</span>(<span class='ident'>ncurses</span>::<span class='ident'>stdscr</span>(), <span class='bool-val'>true</span>);
-        <span class='ident'>ncurses</span>::<span class='ident'>noecho</span>();
-        <span class='ident'>ncurses</span>::<span class='ident'>cbreak</span>();
-        <span class='ident'>ncurses</span>::<span class='ident'>start_color</span>();
-        <span class='ident'>ncurses</span>::<span class='ident'>curs_set</span>(<span class='ident'>ncurses</span>::<span class='ident'>CURSOR_VISIBILITY</span>::<span class='ident'>CURSOR_INVISIBLE</span>);
-        <span class='ident'>ncurses</span>::<span class='ident'>wbkgd</span>(<span class='ident'>ncurses</span>::<span class='ident'>stdscr</span>(),
-                       <span class='ident'>ncurses</span>::<span class='ident'>COLOR_PAIR</span>(<span class='ident'>ColorStyle</span>::<span class='ident'>Background</span>.<span class='ident'>id</span>()));
+<span class="kw">impl</span> <span class="ident">backend</span>::<span class="ident">Backend</span> <span class="kw">for</span> <span class="ident">Concrete</span> {
+    <span class="kw">fn</span> <span class="ident">init</span>() <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="comment">// The delay is the time ncurses wait after pressing ESC</span>
+        <span class="comment">// to see if it&#39;s an escape sequence.</span>
+        <span class="comment">// Default delay is way too long. 25 is imperceptible yet works fine.</span>
+        ::<span class="ident">std</span>::<span class="ident">env</span>::<span class="ident">set_var</span>(<span class="string">&quot;ESCDELAY&quot;</span>, <span class="string">&quot;25&quot;</span>);
+        <span class="ident">ncurses</span>::<span class="ident">setlocale</span>(<span class="ident">ncurses</span>::<span class="ident">LcCategory</span>::<span class="ident">all</span>, <span class="string">&quot;&quot;</span>);
+        <span class="ident">ncurses</span>::<span class="ident">initscr</span>();
+        <span class="ident">ncurses</span>::<span class="ident">keypad</span>(<span class="ident">ncurses</span>::<span class="ident">stdscr</span>(), <span class="bool-val">true</span>);
+        <span class="ident">ncurses</span>::<span class="ident">noecho</span>();
+        <span class="ident">ncurses</span>::<span class="ident">cbreak</span>();
+        <span class="ident">ncurses</span>::<span class="ident">start_color</span>();
+        <span class="ident">ncurses</span>::<span class="ident">curs_set</span>(<span class="ident">ncurses</span>::<span class="ident">CURSOR_VISIBILITY</span>::<span class="ident">CURSOR_INVISIBLE</span>);
+        <span class="ident">ncurses</span>::<span class="ident">wbkgd</span>(<span class="ident">ncurses</span>::<span class="ident">stdscr</span>(),
+                       <span class="ident">ncurses</span>::<span class="ident">COLOR_PAIR</span>(<span class="ident">ColorStyle</span>::<span class="ident">Background</span>.<span class="ident">id</span>()));
 
-        <span class='ident'>Concrete</span>
+        <span class="ident">Concrete</span>
     }
 
-    <span class='kw'>fn</span> <span class='ident'>screen_size</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> (<span class='ident'>usize</span>, <span class='ident'>usize</span>) {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>x</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>y</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='ident'>ncurses</span>::<span class='ident'>getmaxyx</span>(<span class='ident'>ncurses</span>::<span class='ident'>stdscr</span>(), <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>y</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>x</span>);
-        (<span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>usize</span>, <span class='ident'>y</span> <span class='kw'>as</span> <span class='ident'>usize</span>)
+    <span class="kw">fn</span> <span class="ident">screen_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">usize</span>, <span class="ident">usize</span>) {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="ident">ncurses</span>::<span class="ident">getmaxyx</span>(<span class="ident">ncurses</span>::<span class="ident">stdscr</span>(), <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">x</span>);
+        (<span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>, <span class="ident">y</span> <span class="kw">as</span> <span class="ident">usize</span>)
     }
 
-    <span class='kw'>fn</span> <span class='ident'>has_colors</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>bool</span> {
-        <span class='ident'>ncurses</span>::<span class='ident'>has_colors</span>()
+    <span class="kw">fn</span> <span class="ident">has_colors</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">bool</span> {
+        <span class="ident">ncurses</span>::<span class="ident">has_colors</span>()
     }
 
-    <span class='kw'>fn</span> <span class='ident'>finish</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='ident'>ncurses</span>::<span class='ident'>endwin</span>();
+    <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="ident">ncurses</span>::<span class="ident">endwin</span>();
     }
 
 
-    <span class='kw'>fn</span> <span class='ident'>init_color_style</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>style</span>: <span class='ident'>ColorStyle</span>, <span class='ident'>foreground</span>: <span class='kw-2'>&amp;</span><span class='ident'>Color</span>,
-                        <span class='ident'>background</span>: <span class='kw-2'>&amp;</span><span class='ident'>Color</span>) {
-        <span class='comment'>// TODO: build the color on the spot</span>
+    <span class="kw">fn</span> <span class="ident">init_color_style</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">style</span>: <span class="ident">ColorStyle</span>, <span class="ident">foreground</span>: <span class="kw-2">&amp;</span><span class="ident">Color</span>,
+                        <span class="ident">background</span>: <span class="kw-2">&amp;</span><span class="ident">Color</span>) {
+        <span class="comment">// TODO: build the color on the spot</span>
 
-        <span class='ident'>ncurses</span>::<span class='ident'>init_pair</span>(<span class='ident'>style</span>.<span class='ident'>id</span>(),
-                           <span class='ident'>find_closest</span>(<span class='ident'>foreground</span>) <span class='kw'>as</span> <span class='ident'>i16</span>,
-                           <span class='ident'>find_closest</span>(<span class='ident'>background</span>) <span class='kw'>as</span> <span class='ident'>i16</span>);
+        <span class="ident">ncurses</span>::<span class="ident">init_pair</span>(<span class="ident">style</span>.<span class="ident">id</span>(),
+                           <span class="ident">find_closest</span>(<span class="ident">foreground</span>) <span class="kw">as</span> <span class="ident">i16</span>,
+                           <span class="ident">find_closest</span>(<span class="ident">background</span>) <span class="kw">as</span> <span class="ident">i16</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>with_color</span><span class='op'>&lt;</span><span class='ident'>F</span>: <span class='ident'>FnOnce</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>color</span>: <span class='ident'>ColorStyle</span>, <span class='ident'>f</span>: <span class='ident'>F</span>) {
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>current_style</span>: <span class='ident'>ncurses</span>::<span class='ident'>attr_t</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>current_color</span>: <span class='ident'>i16</span> <span class='op'>=</span> <span class='number'>0</span>;
-        <span class='ident'>ncurses</span>::<span class='ident'>attr_get</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>current_style</span>, <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>current_color</span>);
+    <span class="kw">fn</span> <span class="ident">with_color</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnOnce</span>()<span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">color</span>: <span class="ident">ColorStyle</span>, <span class="ident">f</span>: <span class="ident">F</span>) {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_style</span>: <span class="ident">ncurses</span>::<span class="ident">attr_t</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">current_color</span>: <span class="ident">i16</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="ident">ncurses</span>::<span class="ident">attr_get</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">current_style</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">current_color</span>);
 
-        <span class='kw'>let</span> <span class='ident'>style</span> <span class='op'>=</span> <span class='ident'>ncurses</span>::<span class='ident'>COLOR_PAIR</span>(<span class='ident'>color</span>.<span class='ident'>id</span>());
-        <span class='ident'>ncurses</span>::<span class='ident'>attron</span>(<span class='ident'>style</span>);
-        <span class='ident'>f</span>();
-        <span class='comment'>// ncurses::attroff(style);</span>
-        <span class='ident'>ncurses</span>::<span class='ident'>attron</span>(<span class='ident'>current_style</span>);
+        <span class="kw">let</span> <span class="ident">style</span> <span class="op">=</span> <span class="ident">ncurses</span>::<span class="ident">COLOR_PAIR</span>(<span class="ident">color</span>.<span class="ident">id</span>());
+        <span class="ident">ncurses</span>::<span class="ident">attron</span>(<span class="ident">style</span>);
+        <span class="ident">f</span>();
+        <span class="comment">// ncurses::attroff(style);</span>
+        <span class="ident">ncurses</span>::<span class="ident">attron</span>(<span class="ident">current_style</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>with_effect</span><span class='op'>&lt;</span><span class='ident'>F</span>: <span class='ident'>FnOnce</span>()<span class='op'>&gt;</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, <span class='ident'>effect</span>: <span class='ident'>Effect</span>, <span class='ident'>f</span>: <span class='ident'>F</span>) {
-        <span class='kw'>let</span> <span class='ident'>style</span> <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>effect</span> {
-            <span class='ident'>Effect</span>::<span class='ident'>Reverse</span> <span class='op'>=&gt;</span> <span class='ident'>ncurses</span>::<span class='ident'>A_REVERSE</span>(),
-            <span class='ident'>Effect</span>::<span class='ident'>Simple</span> <span class='op'>=&gt;</span> <span class='ident'>ncurses</span>::<span class='ident'>A_NORMAL</span>(),
+    <span class="kw">fn</span> <span class="ident">with_effect</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnOnce</span>()<span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">effect</span>: <span class="ident">Effect</span>, <span class="ident">f</span>: <span class="ident">F</span>) {
+        <span class="kw">let</span> <span class="ident">style</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">effect</span> {
+            <span class="ident">Effect</span>::<span class="ident">Reverse</span> <span class="op">=&gt;</span> <span class="ident">ncurses</span>::<span class="ident">A_REVERSE</span>(),
+            <span class="ident">Effect</span>::<span class="ident">Simple</span> <span class="op">=&gt;</span> <span class="ident">ncurses</span>::<span class="ident">A_NORMAL</span>(),
         };
-        <span class='ident'>ncurses</span>::<span class='ident'>attron</span>(<span class='ident'>style</span>);
-        <span class='ident'>f</span>();
-        <span class='ident'>ncurses</span>::<span class='ident'>attroff</span>(<span class='ident'>style</span>);
+        <span class="ident">ncurses</span>::<span class="ident">attron</span>(<span class="ident">style</span>);
+        <span class="ident">f</span>();
+        <span class="ident">ncurses</span>::<span class="ident">attroff</span>(<span class="ident">style</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>clear</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) {
-        <span class='ident'>ncurses</span>::<span class='ident'>clear</span>();
+    <span class="kw">fn</span> <span class="ident">clear</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="ident">ncurses</span>::<span class="ident">clear</span>();
     }
 
-    <span class='kw'>fn</span> <span class='ident'>refresh</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>) {
-        <span class='ident'>ncurses</span>::<span class='ident'>refresh</span>();
+    <span class="kw">fn</span> <span class="ident">refresh</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+        <span class="ident">ncurses</span>::<span class="ident">refresh</span>();
     }
 
-    <span class='kw'>fn</span> <span class='ident'>print_at</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>, (<span class='ident'>x</span>, <span class='ident'>y</span>): (<span class='ident'>usize</span>, <span class='ident'>usize</span>), <span class='ident'>text</span>: <span class='kw-2'>&amp;</span><span class='ident'>str</span>) {
-        <span class='ident'>ncurses</span>::<span class='ident'>mvaddstr</span>(<span class='ident'>y</span> <span class='kw'>as</span> <span class='ident'>i32</span>, <span class='ident'>x</span> <span class='kw'>as</span> <span class='ident'>i32</span>, <span class='ident'>text</span>);
+    <span class="kw">fn</span> <span class="ident">print_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">text</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) {
+        <span class="ident">ncurses</span>::<span class="ident">mvaddstr</span>(<span class="ident">y</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">x</span> <span class="kw">as</span> <span class="ident">i32</span>, <span class="ident">text</span>);
     }
 
-    <span class='kw'>fn</span> <span class='ident'>poll_event</span>(<span class='kw-2'>&amp;</span><span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>Event</span> {
-        <span class='kw'>let</span> <span class='ident'>ch</span>: <span class='ident'>i32</span> <span class='op'>=</span> <span class='ident'>ncurses</span>::<span class='ident'>getch</span>();
+    <span class="kw">fn</span> <span class="ident">poll_event</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Event</span> {
+        <span class="kw">let</span> <span class="ident">ch</span>: <span class="ident">i32</span> <span class="op">=</span> <span class="ident">ncurses</span>::<span class="ident">getch</span>();
 
-        <span class='comment'>// Is it a UTF-8 starting point?</span>
-        <span class='kw'>if</span> <span class='number'>32</span> <span class='op'>&lt;=</span> <span class='ident'>ch</span> <span class='op'>&amp;&amp;</span> <span class='ident'>ch</span> <span class='op'>&lt;=</span> <span class='number'>255</span> <span class='op'>&amp;&amp;</span> <span class='ident'>ch</span> <span class='op'>!=</span> <span class='number'>127</span> {
-            <span class='ident'>Event</span>::<span class='ident'>Char</span>(<span class='ident'>utf8</span>::<span class='ident'>read_char</span>(<span class='ident'>ch</span> <span class='kw'>as</span> <span class='ident'>u8</span>,
-                                        <span class='op'>||</span> <span class='prelude-val'>Some</span>(<span class='ident'>ncurses</span>::<span class='ident'>getch</span>() <span class='kw'>as</span> <span class='ident'>u8</span>))
-                .<span class='ident'>unwrap</span>())
-        } <span class='kw'>else</span> {
-            <span class='ident'>parse_ncurses_char</span>(<span class='ident'>ch</span>)
+        <span class="comment">// Is it a UTF-8 starting point?</span>
+        <span class="kw">if</span> <span class="number">32</span> <span class="op">&lt;=</span> <span class="ident">ch</span> <span class="op">&amp;&amp;</span> <span class="ident">ch</span> <span class="op">&lt;=</span> <span class="number">255</span> <span class="op">&amp;&amp;</span> <span class="ident">ch</span> <span class="op">!=</span> <span class="number">127</span> {
+            <span class="ident">Event</span>::<span class="ident">Char</span>(<span class="ident">utf8</span>::<span class="ident">read_char</span>(<span class="ident">ch</span> <span class="kw">as</span> <span class="ident">u8</span>,
+                                        <span class="op">||</span> <span class="prelude-val">Some</span>(<span class="ident">ncurses</span>::<span class="ident">getch</span>() <span class="kw">as</span> <span class="ident">u8</span>))
+                                .<span class="ident">unwrap</span>())
+        } <span class="kw">else</span> {
+            <span class="ident">parse_ncurses_char</span>(<span class="ident">ch</span>)
         }
     }
 
-    <span class='kw'>fn</span> <span class='ident'>set_refresh_rate</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>fps</span>: <span class='ident'>u32</span>) {
-        <span class='kw'>if</span> <span class='ident'>fps</span> <span class='op'>==</span> <span class='number'>0</span> {
-            <span class='ident'>ncurses</span>::<span class='ident'>timeout</span>(<span class='op'>-</span><span class='number'>1</span>);
-        } <span class='kw'>else</span> {
-            <span class='ident'>ncurses</span>::<span class='ident'>timeout</span>(<span class='number'>1000</span> <span class='op'>/</span> <span class='ident'>fps</span> <span class='kw'>as</span> <span class='ident'>i32</span>);
+    <span class="kw">fn</span> <span class="ident">set_refresh_rate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">fps</span>: <span class="ident">u32</span>) {
+        <span class="kw">if</span> <span class="ident">fps</span> <span class="op">==</span> <span class="number">0</span> {
+            <span class="ident">ncurses</span>::<span class="ident">timeout</span>(<span class="op">-</span><span class="number">1</span>);
+        } <span class="kw">else</span> {
+            <span class="ident">ncurses</span>::<span class="ident">timeout</span>(<span class="number">1000</span> <span class="op">/</span> <span class="ident">fps</span> <span class="kw">as</span> <span class="ident">i32</span>);
         }
     }
 }
 
-<span class='doccomment'>/// Returns the Key enum corresponding to the given ncurses event.</span>
-<span class='kw'>fn</span> <span class='ident'>parse_ncurses_char</span>(<span class='ident'>ch</span>: <span class='ident'>i32</span>) <span class='op'>-&gt;</span> <span class='ident'>Event</span> {
-    <span class='kw'>match</span> <span class='ident'>ch</span> {
-        <span class='comment'>// Value sent by ncurses when nothing happens</span>
-        <span class='op'>-</span><span class='number'>1</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Refresh</span>,
+<span class="doccomment">/// Returns the Key enum corresponding to the given ncurses event.</span>
+<span class="kw">fn</span> <span class="ident">parse_ncurses_char</span>(<span class="ident">ch</span>: <span class="ident">i32</span>) <span class="op">-&gt;</span> <span class="ident">Event</span> {
+    <span class="kw">match</span> <span class="ident">ch</span> {
+        <span class="comment">// Value sent by ncurses when nothing happens</span>
+        <span class="op">-</span><span class="number">1</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Refresh</span>,
 
-        <span class='comment'>// Values under 256 are chars and control values</span>
-        <span class='comment'>//</span>
-        <span class='comment'>// Tab is &#39;\t&#39;</span>
-        <span class='number'>9</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Tab</span>),
-        <span class='comment'>// Treat &#39;\n&#39; and the numpad Enter the same</span>
-        <span class='number'>10</span> <span class='op'>|</span>
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_ENTER</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Enter</span>),
-        <span class='comment'>// This is the escape key when pressed by itself.</span>
-        <span class='comment'>// When used for control sequences, it should have been caught earlier.</span>
-        <span class='number'>27</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Esc</span>),
-        <span class='comment'>// `Backspace` sends 127, but Ctrl-H sends `Backspace`</span>
-        <span class='number'>127</span> <span class='op'>|</span>
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_BACKSPACE</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Backspace</span>),
+        <span class="comment">// Values under 256 are chars and control values</span>
+        <span class="comment">//</span>
+        <span class="comment">// Tab is &#39;\t&#39;</span>
+        <span class="number">9</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Tab</span>),
+        <span class="comment">// Treat &#39;\n&#39; and the numpad Enter the same</span>
+        <span class="number">10</span> <span class="op">|</span>
+        <span class="ident">ncurses</span>::<span class="ident">KEY_ENTER</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Enter</span>),
+        <span class="comment">// This is the escape key when pressed by itself.</span>
+        <span class="comment">// When used for control sequences, it should have been caught earlier.</span>
+        <span class="number">27</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Esc</span>),
+        <span class="comment">// `Backspace` sends 127, but Ctrl-H sends `Backspace`</span>
+        <span class="number">127</span> <span class="op">|</span>
+        <span class="ident">ncurses</span>::<span class="ident">KEY_BACKSPACE</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Backspace</span>),
 
-        <span class='number'>410</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>WindowResize</span>,
+        <span class="number">410</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">WindowResize</span>,
 
-        <span class='comment'>// Values 512 and above are probably extensions</span>
-        <span class='comment'>// Those keys don&#39;t seem to be documented...</span>
-        <span class='number'>519</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='number'>520</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='number'>521</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='number'>522</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='comment'>// 523: CtrlAltDel?</span>
-        <span class='comment'>//</span>
-        <span class='comment'>// 524?</span>
-        <span class='number'>525</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='number'>526</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='number'>527</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='number'>528</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='number'>529</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
+        <span class="comment">// Values 512 and above are probably extensions</span>
+        <span class="comment">// Those keys don&#39;t seem to be documented...</span>
+        <span class="number">519</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="number">520</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="number">521</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="number">522</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="comment">// 523: CtrlAltDel?</span>
+        <span class="comment">//</span>
+        <span class="comment">// 524?</span>
+        <span class="number">525</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="number">526</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="number">527</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="number">528</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="number">529</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
 
-        <span class='number'>530</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='number'>531</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='number'>532</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='number'>533</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='number'>534</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
+        <span class="number">530</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="number">531</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="number">532</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="number">533</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="number">534</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
 
-        <span class='number'>535</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='number'>536</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='number'>537</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='number'>538</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='number'>539</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
+        <span class="number">535</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="number">536</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="number">537</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="number">538</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="number">539</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
 
-        <span class='number'>540</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Ins</span>),
-        <span class='comment'>// 541: AltShiftIns?</span>
-        <span class='number'>542</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Ins</span>),
-        <span class='comment'>// 543: CtrlShiftIns?</span>
-        <span class='number'>544</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Ins</span>),
+        <span class="number">540</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Ins</span>),
+        <span class="comment">// 541: AltShiftIns?</span>
+        <span class="number">542</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Ins</span>),
+        <span class="comment">// 543: CtrlShiftIns?</span>
+        <span class="number">544</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Ins</span>),
 
-        <span class='number'>545</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='number'>546</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='number'>547</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='number'>548</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='number'>549</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
+        <span class="number">545</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="number">546</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="number">547</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="number">548</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="number">549</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
 
-        <span class='number'>550</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='number'>551</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='number'>552</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='number'>553</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='number'>554</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
+        <span class="number">550</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="number">551</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="number">552</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="number">553</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="number">554</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
 
-        <span class='number'>555</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='number'>556</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='number'>557</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='number'>558</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='number'>559</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
+        <span class="number">555</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="number">556</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="number">557</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="number">558</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="number">559</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
 
-        <span class='number'>560</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='number'>561</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='number'>562</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='number'>563</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='number'>564</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='comment'>// 565?</span>
-        <span class='number'>566</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='number'>567</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>AltShift</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='number'>568</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='number'>569</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='number'>570</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlAlt</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
+        <span class="number">560</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="number">561</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="number">562</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="number">563</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="number">564</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="comment">// 565?</span>
+        <span class="number">566</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="number">567</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">AltShift</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="number">568</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="number">569</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="number">570</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlAlt</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
 
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_B2</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>NumpadCenter</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_DC</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_IC</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Ins</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_BTAB</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Tab</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SLEFT</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SRIGHT</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_LEFT</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Left</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_RIGHT</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Right</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_UP</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_DOWN</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SR</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Up</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SF</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Down</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_PPAGE</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_NPAGE</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_HOME</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_END</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SHOME</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Home</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SEND</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>End</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SDC</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>Del</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SNEXT</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>PageDown</span>),
-        <span class='ident'>ncurses</span>::<span class='ident'>KEY_SPREVIOUS</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>PageUp</span>),
-        <span class='comment'>// All Fn keys use the same enum with associated number</span>
-        <span class='ident'>f</span> @ <span class='ident'>ncurses</span>::<span class='ident'>KEY_F1</span>...<span class='ident'>ncurses</span>::<span class='ident'>KEY_F12</span> <span class='op'>=&gt;</span> {
-            <span class='ident'>Event</span>::<span class='ident'>Key</span>(<span class='ident'>Key</span>::<span class='ident'>from_f</span>((<span class='ident'>f</span> <span class='op'>-</span> <span class='ident'>ncurses</span>::<span class='ident'>KEY_F0</span>) <span class='kw'>as</span> <span class='ident'>u8</span>))
+        <span class="ident">ncurses</span>::<span class="ident">KEY_B2</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">NumpadCenter</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_DC</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_IC</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Ins</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_BTAB</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Tab</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SLEFT</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SRIGHT</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_LEFT</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Left</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_RIGHT</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Right</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_UP</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_DOWN</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SR</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Up</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SF</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Down</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_PPAGE</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_NPAGE</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_HOME</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_END</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SHOME</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Home</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SEND</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">End</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SDC</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">Del</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SNEXT</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">PageDown</span>),
+        <span class="ident">ncurses</span>::<span class="ident">KEY_SPREVIOUS</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">PageUp</span>),
+        <span class="comment">// All Fn keys use the same enum with associated number</span>
+        <span class="ident">f</span> @ <span class="ident">ncurses</span>::<span class="ident">KEY_F1</span>...<span class="ident">ncurses</span>::<span class="ident">KEY_F12</span> <span class="op">=&gt;</span> {
+            <span class="ident">Event</span>::<span class="ident">Key</span>(<span class="ident">Key</span>::<span class="ident">from_f</span>((<span class="ident">f</span> <span class="op">-</span> <span class="ident">ncurses</span>::<span class="ident">KEY_F0</span>) <span class="kw">as</span> <span class="ident">u8</span>))
         }
-        <span class='ident'>f</span> @ <span class='number'>277</span>...<span class='number'>288</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Shift</span>(<span class='ident'>Key</span>::<span class='ident'>from_f</span>((<span class='ident'>f</span> <span class='op'>-</span> <span class='number'>276</span>) <span class='kw'>as</span> <span class='ident'>u8</span>)),
-        <span class='ident'>f</span> @ <span class='number'>289</span>...<span class='number'>300</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Ctrl</span>(<span class='ident'>Key</span>::<span class='ident'>from_f</span>((<span class='ident'>f</span> <span class='op'>-</span> <span class='number'>288</span>) <span class='kw'>as</span> <span class='ident'>u8</span>)),
-        <span class='ident'>f</span> @ <span class='number'>301</span>...<span class='number'>312</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlShift</span>(<span class='ident'>Key</span>::<span class='ident'>from_f</span>((<span class='ident'>f</span> <span class='op'>-</span> <span class='number'>300</span>) <span class='kw'>as</span> <span class='ident'>u8</span>)),
-        <span class='ident'>f</span> @ <span class='number'>313</span>...<span class='number'>324</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Alt</span>(<span class='ident'>Key</span>::<span class='ident'>from_f</span>((<span class='ident'>f</span> <span class='op'>-</span> <span class='number'>312</span>) <span class='kw'>as</span> <span class='ident'>u8</span>)),
-        <span class='comment'>// Values 8-10 (H,I,J) are used by other commands,</span>
-        <span class='comment'>// so we probably won&#39;t receive them. Meh~</span>
-        <span class='ident'>c</span> @ <span class='number'>1</span>...<span class='number'>25</span> <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>CtrlChar</span>((<span class='string'>b&#39;a&#39;</span> <span class='op'>+</span> (<span class='ident'>c</span> <span class='op'>-</span> <span class='number'>1</span>) <span class='kw'>as</span> <span class='ident'>u8</span>) <span class='kw'>as</span> <span class='ident'>char</span>),
-        _ <span class='op'>=&gt;</span> <span class='ident'>Event</span>::<span class='ident'>Unknown</span>(<span class='ident'>ch</span>),
+        <span class="ident">f</span> @ <span class="number">277</span>...<span class="number">288</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Shift</span>(<span class="ident">Key</span>::<span class="ident">from_f</span>((<span class="ident">f</span> <span class="op">-</span> <span class="number">276</span>) <span class="kw">as</span> <span class="ident">u8</span>)),
+        <span class="ident">f</span> @ <span class="number">289</span>...<span class="number">300</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Ctrl</span>(<span class="ident">Key</span>::<span class="ident">from_f</span>((<span class="ident">f</span> <span class="op">-</span> <span class="number">288</span>) <span class="kw">as</span> <span class="ident">u8</span>)),
+        <span class="ident">f</span> @ <span class="number">301</span>...<span class="number">312</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlShift</span>(<span class="ident">Key</span>::<span class="ident">from_f</span>((<span class="ident">f</span> <span class="op">-</span> <span class="number">300</span>) <span class="kw">as</span> <span class="ident">u8</span>)),
+        <span class="ident">f</span> @ <span class="number">313</span>...<span class="number">324</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">Alt</span>(<span class="ident">Key</span>::<span class="ident">from_f</span>((<span class="ident">f</span> <span class="op">-</span> <span class="number">312</span>) <span class="kw">as</span> <span class="ident">u8</span>)),
+        <span class="comment">// Values 8-10 (H,I,J) are used by other commands,</span>
+        <span class="comment">// so we probably won&#39;t receive them. Meh~</span>
+        <span class="ident">c</span> @ <span class="number">1</span>...<span class="number">25</span> <span class="op">=&gt;</span> <span class="ident">Event</span>::<span class="ident">CtrlChar</span>((<span class="string">b&#39;a&#39;</span> <span class="op">+</span> (<span class="ident">c</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">u8</span>) <span class="kw">as</span> <span class="ident">char</span>),
+        <span class="ident">other</span> <span class="op">=&gt;</span> {
+            <span class="comment">// Split the i32 into 4 bytes</span>
+            <span class="ident">Event</span>::<span class="ident">Unknown</span>((<span class="number">0</span>..<span class="number">4</span>)
+                               .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> ((<span class="ident">other</span> <span class="op">&gt;&gt;</span> (<span class="number">8</span> <span class="op">*</span> <span class="ident">i</span>)) <span class="op">&amp;</span> <span class="number">0xFF</span>) <span class="kw">as</span> <span class="ident">u8</span>)
+                               .<span class="ident">collect</span>())
+        }
     }
 }
 </pre>

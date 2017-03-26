@@ -44,24 +44,24 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>cursive</a>::<wbr><a href='index.html'>view</a>::<wbr><a class='trait' href=''>Identifiable</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>cursive</a>::<wbr><a href='index.html'>view</a>::<wbr><a class="trait" href=''>Identifiable</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
                </span><a class='srclink' href='../../src/cursive/view/identifiable.rs.html#7-14' title='goto source code'>[src]</a></span></h1>
-<pre class='rust trait'>pub trait Identifiable: <a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> {
-    fn <a href='#method.with_id' class='fnname'>with_id</a>(self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../cursive/views/struct.IdView.html' title='cursive::views::IdView'>IdView</a>&lt;Self&gt; { ... }
+<pre class='rust trait'>pub trait Identifiable: <a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a> {
+    fn <a href='#method.with_id' class='fnname'>with_id</a>&lt;S:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;&gt;(self, id: S) -&gt; <a class="struct" href="../../cursive/views/struct.IdView.html" title="struct cursive::views::IdView">IdView</a>&lt;Self&gt; { ... }
 }</pre><div class='docblock'><p>Makes a view wrappable in an <a href="../views/struct.IdView.html"><code>IdView</code></a>.</p>
 </div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.with_id' class='method'><span id='with_id.v' class='invisible'><code>fn <a href='#method.with_id' class='fnname'>with_id</a>(self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='struct' href='../../cursive/views/struct.IdView.html' title='cursive::views::IdView'>IdView</a>&lt;Self&gt;</code></span></h3><div class='docblock'><p>Wraps this view into an IdView with the given id.</p>
+        <h3 id='method.with_id' class='method'><span id='with_id.v' class='invisible'><code>fn <a href='#method.with_id' class='fnname'>with_id</a>&lt;S:&nbsp;<a class="trait" href="https://doc.rust-lang.org/nightly/core/convert/trait.Into.html" title="trait core::convert::Into">Into</a>&lt;<a class="struct" href="https://doc.rust-lang.org/nightly/collections/string/struct.String.html" title="struct collections::string::String">String</a>&gt;&gt;(self, id: S) -&gt; <a class="struct" href="../../cursive/views/struct.IdView.html" title="struct cursive::views::IdView">IdView</a>&lt;Self&gt;</code></span></h3><div class='docblock'><p>Wraps this view into an <code>IdView</code> with the given id.</p>
 
 <p>This is just a shortcut for <code>IdView::new(id, self)</code></p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a>&gt; Identifiable for T</code></li>
+    <li><code>impl&lt;T:&nbsp;<a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a>&gt; Identifiable for T</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/cursive/view/trait.Identifiable.js">
                  </script></section>

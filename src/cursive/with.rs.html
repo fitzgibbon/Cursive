@@ -54,18 +54,18 @@
 <span id="9"> 9</span>
 <span id="10">10</span>
 <span id="11">11</span>
-</pre><pre class='rust '>
+</pre><pre class="rust ">
 
-<span class='doccomment'>/// Generic trait to enable chainable API</span>
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>With</span>: <span class='ident'>Sized</span> {
-    <span class='doccomment'>/// Calls the given closure on `self`.</span>
-    <span class='kw'>fn</span> <span class='ident'>with</span><span class='op'>&lt;</span><span class='ident'>F</span>: <span class='ident'>FnOnce</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>Self</span>)<span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='self'>self</span>, <span class='ident'>f</span>: <span class='ident'>F</span>) <span class='op'>-&gt;</span> <span class='self'>Self</span> {
-        <span class='ident'>f</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='self'>self</span>);
-        <span class='self'>self</span>
+<span class="doccomment">/// Generic trait to enable chainable API</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">With</span>: <span class="ident">Sized</span> {
+    <span class="doccomment">/// Calls the given closure on `self`.</span>
+    <span class="kw">fn</span> <span class="ident">with</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>)<span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
+        <span class="self">self</span>
     }
 }
 
-<span class='kw'>impl</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Sized</span><span class='op'>&gt;</span> <span class='ident'>With</span> <span class='kw'>for</span> <span class='ident'>T</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">With</span> <span class="kw">for</span> <span class="ident">T</span> {}
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

@@ -44,15 +44,15 @@
     </nav>
 
     <section id='main' class="content trait">
-<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>cursive</a>::<wbr><a href='index.html'>view</a>::<wbr><a class='trait' href=''>Finder</a></span><span class='out-of-band'><span id='render-detail'>
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>cursive</a>::<wbr><a href='index.html'>view</a>::<wbr><a class="trait" href=''>Finder</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../../src/cursive/view/mod.rs.html#148-159' title='goto source code'>[src]</a></span></h1>
+               </span><a class='srclink' href='../../src/cursive/view/mod.rs.html#156-172' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Finder {
-    fn <a href='#tymethod.find' class='fnname'>find</a>&lt;V:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>&gt;(&amp;mut self, sel: &amp;<a class='enum' href='../../cursive/view/enum.Selector.html' title='cursive::view::Selector'>Selector</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt;;
+    fn <a href='#tymethod.find' class='fnname'>find</a>&lt;V, F, R&gt;(&amp;mut self, sel: &amp;<a class="enum" href="../../cursive/view/enum.Selector.html" title="enum cursive::view::Selector">Selector</a>, callback: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;R&gt; <span class="where fmt-newline">where V: <a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/any/trait.Any.html" title="trait core::any::Any">Any</a>, F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html" title="trait core::ops::FnOnce">FnOnce</a>(&amp;mut V) -&gt; R</span>;
 
-    fn <a href='#method.find_id' class='fnname'>find_id</a>&lt;V:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>&gt;(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt; { ... }
+    fn <a href='#method.find_id' class='fnname'>find_id</a>&lt;V, F, R&gt;(&amp;mut self, id: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, callback: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;R&gt; <span class="where fmt-newline">where V: <a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/any/trait.Any.html" title="trait core::any::Any">Any</a>, F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html" title="trait core::ops::FnOnce">FnOnce</a>(&amp;mut V) -&gt; R</span> { ... }
 }</pre><div class='docblock'><p>Provides <code>find&lt;V: View&gt;</code> to views.</p>
 
 <p>This trait is mostly a wrapper around <a href="./trait.View.html#method.find_any"><code>View::find_any</code></a>.</p>
@@ -61,18 +61,18 @@
 </div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.find' class='method'><span id='find.v' class='invisible'><code>fn <a href='#tymethod.find' class='fnname'>find</a>&lt;V:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>&gt;(&amp;mut self, sel: &amp;<a class='enum' href='../../cursive/view/enum.Selector.html' title='cursive::view::Selector'>Selector</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt;</code></span></h3><div class='docblock'><p>Tries to find the view pointed to by the given selector.</p>
+        <h3 id='tymethod.find' class='method'><span id='find.v' class='invisible'><code>fn <a href='#tymethod.find' class='fnname'>find</a>&lt;V, F, R&gt;(&amp;mut self, sel: &amp;<a class="enum" href="../../cursive/view/enum.Selector.html" title="enum cursive::view::Selector">Selector</a>, callback: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;R&gt; <span class="where fmt-newline">where V: <a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/any/trait.Any.html" title="trait core::any::Any">Any</a>, F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html" title="trait core::ops::FnOnce">FnOnce</a>(&amp;mut V) -&gt; R</span></code></span></h3><div class='docblock'><p>Tries to find the view pointed to by the given selector.</p>
 
 <p>If the view is not found, or if it is not of the asked type,
 it returns None.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.find_id' class='method'><span id='find_id.v' class='invisible'><code>fn <a href='#method.find_id' class='fnname'>find_id</a>&lt;V:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a> + <a class='trait' href='https://doc.rust-lang.org/nightly/core/any/trait.Any.html' title='core::any::Any'>Any</a>&gt;(&amp;mut self, id: &amp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;&amp;mut V&gt;</code></span></h3><div class='docblock'><p>Convenient method to use <code>find</code> with a <code>view::Selector::Id</code>.</p>
+        <h3 id='method.find_id' class='method'><span id='find_id.v' class='invisible'><code>fn <a href='#method.find_id' class='fnname'>find_id</a>&lt;V, F, R&gt;(&amp;mut self, id: &amp;<a class="primitive" href="https://doc.rust-lang.org/nightly/std/primitive.str.html">str</a>, callback: F) -&gt; <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;R&gt; <span class="where fmt-newline">where V: <a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/any/trait.Any.html" title="trait core::any::Any">Any</a>, F: <a class="trait" href="https://doc.rust-lang.org/nightly/core/ops/trait.FnOnce.html" title="trait core::ops::FnOnce">FnOnce</a>(&amp;mut V) -&gt; R</span></code></span></h3><div class='docblock'><p>Convenient method to use <code>find</code> with a <code>view::Selector::Id</code>.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
-    <li><code>impl&lt;T:&nbsp;<a class='trait' href='../../cursive/view/trait.View.html' title='cursive::view::View'>View</a>&gt; Finder for T</code></li>
+    <li><code>impl&lt;T:&nbsp;<a class="trait" href="../../cursive/view/trait.View.html" title="trait cursive::view::View">View</a>&gt; Finder for T</code></li>
 </ul><script type="text/javascript" async
                          src="../../implementors/cursive/view/trait.Finder.js">
                  </script></section>

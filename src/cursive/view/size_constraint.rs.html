@@ -92,53 +92,53 @@
 <span id="47">47</span>
 <span id="48">48</span>
 <span id="49">49</span>
-</pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>cmp</span>::<span class='ident'>min</span>;
+</pre><pre class="rust ">
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">min</span>;
 
-<span class='doccomment'>/// Single-dimensional constraint on a view size.</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// This describes a possible behaviour for a [`BoxView`].</span>
-<span class='doccomment'>///</span>
-<span class='doccomment'>/// [`BoxView`]: ../views/struct.BoxView.html</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>Copy</span>)]</span>
-<span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>SizeConstraint</span> {
-    <span class='doccomment'>/// No constraint imposed, the child view&#39;s response is used.</span>
-    <span class='ident'>Free</span>,
-    <span class='doccomment'>/// Tries to take all available space, no matter what the child needs.</span>
-    <span class='ident'>Full</span>,
-    <span class='doccomment'>/// Always return the included size, no matter what the child needs.</span>
-    <span class='ident'>Fixed</span>(<span class='ident'>usize</span>),
-    <span class='doccomment'>/// Returns the minimum of the included value and the child view&#39;s size.</span>
-    <span class='ident'>AtMost</span>(<span class='ident'>usize</span>),
-    <span class='doccomment'>/// Returns the maximum of the included value and the child view&#39;s size.</span>
-    <span class='ident'>AtLeast</span>(<span class='ident'>usize</span>),
+<span class="doccomment">/// Single-dimensional constraint on a view size.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This describes a possible behaviour for a [`BoxView`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [`BoxView`]: ../views/struct.BoxView.html</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SizeConstraint</span> {
+    <span class="doccomment">/// No constraint imposed, the child view&#39;s response is used.</span>
+    <span class="ident">Free</span>,
+    <span class="doccomment">/// Tries to take all available space, no matter what the child needs.</span>
+    <span class="ident">Full</span>,
+    <span class="doccomment">/// Always return the included size, no matter what the child needs.</span>
+    <span class="ident">Fixed</span>(<span class="ident">usize</span>),
+    <span class="doccomment">/// Returns the minimum of the included value and the child view&#39;s size.</span>
+    <span class="ident">AtMost</span>(<span class="ident">usize</span>),
+    <span class="doccomment">/// Returns the maximum of the included value and the child view&#39;s size.</span>
+    <span class="ident">AtLeast</span>(<span class="ident">usize</span>),
 }
 
-<span class='kw'>impl</span> <span class='ident'>SizeConstraint</span> {
-    <span class='doccomment'>/// Returns the size to be given to the child.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// When `available` is offered to the `BoxView`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>available</span>(<span class='self'>self</span>, <span class='ident'>available</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
-        <span class='kw'>match</span> <span class='self'>self</span> {
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>Free</span> <span class='op'>|</span>
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>Full</span> <span class='op'>|</span>
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>AtLeast</span>(_) <span class='op'>=&gt;</span> <span class='ident'>available</span>,
-            <span class='comment'>// If the available space is too small, always give in.</span>
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>Fixed</span>(<span class='ident'>value</span>) <span class='op'>|</span>
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>AtMost</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> <span class='ident'>min</span>(<span class='ident'>value</span>, <span class='ident'>available</span>),
+<span class="kw">impl</span> <span class="ident">SizeConstraint</span> {
+    <span class="doccomment">/// Returns the size to be given to the child.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// When `available` is offered to the `BoxView`.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">available</span>(<span class="self">self</span>, <span class="ident">available</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SizeConstraint</span>::<span class="ident">Free</span> <span class="op">|</span>
+            <span class="ident">SizeConstraint</span>::<span class="ident">Full</span> <span class="op">|</span>
+            <span class="ident">SizeConstraint</span>::<span class="ident">AtLeast</span>(_) <span class="op">=&gt;</span> <span class="ident">available</span>,
+            <span class="comment">// If the available space is too small, always give in.</span>
+            <span class="ident">SizeConstraint</span>::<span class="ident">Fixed</span>(<span class="ident">value</span>) <span class="op">|</span>
+            <span class="ident">SizeConstraint</span>::<span class="ident">AtMost</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="ident">min</span>(<span class="ident">value</span>, <span class="ident">available</span>),
         }
     }
 
-    <span class='doccomment'>/// Returns the size the child view should actually use.</span>
-    <span class='doccomment'>///</span>
-    <span class='doccomment'>/// When it said it wanted `result`.</span>
-    <span class='kw'>pub</span> <span class='kw'>fn</span> <span class='ident'>result</span>(<span class='self'>self</span>, (<span class='ident'>result</span>, <span class='ident'>available</span>): (<span class='ident'>usize</span>, <span class='ident'>usize</span>)) <span class='op'>-&gt;</span> <span class='ident'>usize</span> {
-        <span class='kw'>match</span> <span class='self'>self</span> {
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>AtLeast</span>(<span class='ident'>value</span>) <span class='kw'>if</span> <span class='ident'>result</span> <span class='op'>&lt;</span> <span class='ident'>value</span> <span class='op'>=&gt;</span> <span class='ident'>value</span>,
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>AtMost</span>(<span class='ident'>value</span>) <span class='kw'>if</span> <span class='ident'>result</span> <span class='op'>&gt;</span> <span class='ident'>value</span> <span class='op'>=&gt;</span> <span class='ident'>value</span>,
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>Fixed</span>(<span class='ident'>value</span>) <span class='op'>=&gt;</span> <span class='ident'>value</span>,
-            <span class='ident'>SizeConstraint</span>::<span class='ident'>Full</span> <span class='op'>=&gt;</span> <span class='ident'>available</span>,
-            _ <span class='op'>=&gt;</span> <span class='ident'>result</span>,
+    <span class="doccomment">/// Returns the size the child view should actually use.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// When it said it wanted `result`.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">result</span>(<span class="self">self</span>, (<span class="ident">result</span>, <span class="ident">available</span>): (<span class="ident">usize</span>, <span class="ident">usize</span>)) <span class="op">-&gt;</span> <span class="ident">usize</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">SizeConstraint</span>::<span class="ident">AtLeast</span>(<span class="ident">value</span>) <span class="kw">if</span> <span class="ident">result</span> <span class="op">&lt;</span> <span class="ident">value</span> <span class="op">=&gt;</span> <span class="ident">value</span>,
+            <span class="ident">SizeConstraint</span>::<span class="ident">AtMost</span>(<span class="ident">value</span>) <span class="kw">if</span> <span class="ident">result</span> <span class="op">&gt;</span> <span class="ident">value</span> <span class="op">=&gt;</span> <span class="ident">value</span>,
+            <span class="ident">SizeConstraint</span>::<span class="ident">Fixed</span>(<span class="ident">value</span>) <span class="op">=&gt;</span> <span class="ident">value</span>,
+            <span class="ident">SizeConstraint</span>::<span class="ident">Full</span> <span class="op">=&gt;</span> <span class="ident">available</span>,
+            _ <span class="op">=&gt;</span> <span class="ident">result</span>,
         }
     }
 }
