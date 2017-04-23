@@ -30,7 +30,7 @@ pub trait Backend {
 
     fn print_at(&self, (usize, usize), &str);
 
-    fn poll_event(&self) -> event::Event;
+    fn poll_event(&mut self) -> event::Event;
     fn set_refresh_rate(&mut self, fps: u32);
     fn screen_size(&self) -> (usize, usize);
 
