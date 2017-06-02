@@ -74,6 +74,12 @@ impl Concrete {
         let (ref fg, ref bg) = self.colors[&color_style.id()];
         apply_colors(&**fg, &**bg);
     }
+
+    fn apply_any_color(&self, fg_color: theme::Color, bg_color: theme::Color) {
+        let ref fg = colour_to_termion_colour(&fg_color);
+        let ref bg = colour_to_termion_colour(&bg_color);
+        apply_colors(&**fg, &**bg);
+    }
 }
 
 impl backend::Backend for Concrete {
@@ -130,6 +136,17 @@ impl backend::Backend for Concrete {
 
         self.apply_colorstyle(current_style);
     }
+
+    fn with_any_color<F: FnOnce()>(&self, fg_color: theme::Color, bg_color: theme::Color, f: F) {
+        let current_style = self.current_style.get();
+
+        self.apply_any_color(fg_color, bg_color);
+
+        f();
+        self.current_style.set(current_style);
+
+        self.apply_colorstyle(current_style);
+     }
 
     fn with_effect<F: FnOnce()>(&self, effect: theme::Effect, f: F) {
         effect.on();

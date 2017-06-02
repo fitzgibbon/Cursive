@@ -6,7 +6,7 @@ use std::cell::Cell;
 use std::cmp::min;
 use std::rc::Rc;
 
-use theme::{BorderStyle, ColorStyle, Effect, Theme};
+use theme::{BorderStyle, ColorStyle, Color, Effect, Theme};
 use unicode_segmentation::UnicodeSegmentation;
 
 use utils::prefix;
@@ -132,6 +132,14 @@ impl<'a> Printer<'a> {
         where F: FnOnce(&Printer)
     {
         self.backend.with_color(c, || f(self));
+    }
+
+    /// Same as `with_color`, but use any color even if it is
+    /// not part of the current theme's palette.
+    pub fn with_any_color<F>(&self, fg_color: Color, bg_color: Color, f: F)
+        where F: FnOnce(&Printer)
+    {
+        self.backend.with_any_color(fg_color, bg_color, || f(self));
     }
 
     /// Same as `with_color`, but apply a ncurses style instead,

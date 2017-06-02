@@ -36,5 +36,6 @@ pub trait Backend {
 
     // TODO: unify those into a single method?
     fn with_color<F: FnOnce()>(&self, color: theme::ColorStyle, f: F);
+    fn with_any_color<F: FnOnce()>(&self, fg_color: theme::Color, bg_color: theme::Color, f: F);
     fn with_effect<F: FnOnce()>(&self, effect: theme::Effect, f: F);
 }

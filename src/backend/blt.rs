@@ -36,6 +36,10 @@ impl backend::Backend for Concrete {
         terminal::with_colors(fg, bg, f);
     }
 
+    fn with_any_color<F: FnOnce()>(&self, fg_color: Color, bg_color: Color, f: F) {
+        f();
+    }
+
     fn with_effect<F: FnOnce()>(&self, effect: Effect, f: F) {
         match effect {
             Effect::Simple => f(),

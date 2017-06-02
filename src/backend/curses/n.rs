@@ -65,6 +65,10 @@ impl backend::Backend for Concrete {
         ncurses::attron(current_style);
     }
 
+    fn with_any_color<F: FnOnce()>(&self, fg_color: Color, bg_color: Color, f: F) {
+        f();
+    }
+
     fn with_effect<F: FnOnce()>(&self, effect: Effect, f: F) {
         let style = match effect {
             Effect::Reverse => ncurses::A_REVERSE(),
