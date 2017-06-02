@@ -141,10 +141,7 @@ impl backend::Backend for Concrete {
         let current_style = self.current_style.get();
 
         self.apply_any_color(fg_color, bg_color);
-
         f();
-        self.current_style.set(current_style);
-
         self.apply_colorstyle(current_style);
      }
 
